@@ -1,8 +1,9 @@
-# atlas
 
 <p align="center">
     <img src="./assets/alternatives/pride_transparent_500x500_lq.png" height="256" width="256" />
 </p>
+
+# atlas
 
 > **Note**
 > Atlas is not and will never be self-hostable. If that's what you're here for, you're out of luck.

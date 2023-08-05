@@ -1,0 +1,32 @@
+{
+  "name": "@atlasbot/emoji",
+  "version": "10.5.12",
+  "type": "module",
+  "private": true,
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./sheet-24x24.png": "./data/sheet-24x24.png"
+  },
+  "scripts": {
+    "build": "tsc --noEmit && tsup",
+    "lint": "eslint src --fix",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@atlasbot/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@atlasbot/configs": "workspace:*",
+    "@types/node": "^20.4.8",
+    "@types/pngquant-bin": "^4.0.0",
+    "eslint": "^8.46.0",
+    "p-limit": "^4.0.0",
+    "p-retry": "^5.1.2",
+    "sharp": "^0.32.3",
+    "tsup": "^7.2.0",
+    "typescript": "^5.1.6",
+    "undici": "^5.23.0",
+    "vitest": "^0.33.0"
+  }
+}

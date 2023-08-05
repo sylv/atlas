@@ -1,0 +1,25 @@
+{
+  "name": "@atlasbot/colour",
+  "version": "10.5.12",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": "./dist/index.js",
+  "private": true,
+  "scripts": {
+    "build": "tsc --noEmit && tsup",
+    "lint": "eslint src --fix",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@atlasbot/core": "workspace:*",
+    "hex-rgb": "^5.0.0",
+    "rgb-hex": "^4.0.1"
+  },
+  "devDependencies": {
+    "@atlasbot/configs": "workspace:*",
+    "eslint": "^8.46.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.1.6",
+    "vitest": "^0.33.0"
+  }
+}
