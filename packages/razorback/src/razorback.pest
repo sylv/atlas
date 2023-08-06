@@ -1,0 +1,19 @@
+tag        = { "{" ~ name ~ tag_option* ~ tag_param* ~ "}" }
+tag_param  = { ";" ~ value }
+tag_option = { " " ~ name ~ "=" ~ value }
+
+array = {
+    "{[" ~ "]}"
+  | "{[" ~ value ~ (";" ~ value)* ~ "]}"
+}
+
+variable_assign    = { "{=" ~ name ~ tag_param* ~ "}" }
+variable_reference = { "{$" ~ name ~ "}" }
+
+// tag, param etc names
+name = @{ (ASCII_ALPHANUMERIC | "_" | ".")+ }
+
+text    = { (WHITE_SPACE | ASCII_ALPHANUMERIC | NEWLINE | "!" | "_" | ":" | "," | "\"")+ }
+comment = { "//" ~ (!NEWLINE ~ ANY)* ~ NEWLINE? }
+
+value = _{ (array | tag | variable_assign | variable_reference | comment | text)* }
