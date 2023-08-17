@@ -4,11 +4,22 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
-  "private": true,
+  "license": "AGPL-3.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sylv/atlas.git"
+  },
   "scripts": {
     "build": "tsc --noEmit && tsup",
     "lint": "eslint src --fix",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "pnpm run test && pnpm run build"
   },
   "dependencies": {
     "@atlasbot/core": "workspace:*",
