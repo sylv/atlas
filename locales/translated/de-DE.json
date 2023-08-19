@@ -65,7 +65,7 @@
   "PUNISHMENT_ERROR_CANNOT_PUNISH_SELF": "Sie können sich nicht selbst bestrafen.",
   "PUNISHMENT_ERROR_CANNOT_PUNISH_OWNER": "Sie können den Besitzer nicht bestrafen.",
   "PUNISHMENT_ERROR_CANNOT_PUNISH_SUPERIOR": "Sie können keine Benutzer bestrafen, die in der Rollenhierarchie über Ihnen stehen.",
-  "PUNISHMENT_ERROR_CANNOT_PUNISH_OTHER_BOT": "Sie können keine anderen Bots bestrafen.",
+  "PUNISHMENT_ERROR_CANNOT_PUNISH_OTHER_BOT": "Sie können andere Bots nicht bestrafen.",
   "PUNISHMENT_ERROR_CANNOT_PUNISH_BOT": "Sie können mich nicht bestrafen.",
   "COMMAND_MISSING_OPTIONS_DURATION": "Sie müssen eine Dauer angeben.",
   "COMMAND_MISSING_OPTIONS_REASON": "Sie müssen einen Grund angeben.",
