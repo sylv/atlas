@@ -24,7 +24,7 @@ export const DEFAULT_TICKET_RESPONSE = `
 `.trim();
 
 export const DEFAULT_TICKET_TOPIC = `
-Opened by {user.tag} {if;{ticket.reason};for "{ticket.reason}"}
+Opened by {user.username} {if;{ticket.reason};for "{ticket.reason}"}
 `.trim();
 
 export const DEFAULT_SUGGESTION_PENDING_NOTIFICATION = `
@@ -65,7 +65,7 @@ export const DEFAULT_SUGGESTION_TEMPLATE = `
 // Check whether anonymous suggestions are enabled
 {=anonymous;{settings;suggestions;anonymousSuggestions}}
 // If anonymous suggestions are enabled, dont include the author
-{=authorName;{#if;{$anonymous};Suggestion {suggestion.id};{user.tag;{suggestion.authorId}}}}
+{=authorName;{#if;{$anonymous};Suggestion {suggestion.id};{user.username;{suggestion.authorId}}}}
 // Only include the authors image if anonymous suggestions are disabled
 {=authorImage;{#if;{$anonymous};===;false;{user.avatar;{suggestion.authorId}}}}
 // If anonymous suggestions are disabled, add the suggestion ID to the footer as it wont be included in the title.
