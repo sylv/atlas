@@ -87,7 +87,7 @@
   "COMMAND_CASE_NOT_WARNING_CANNOT_DELETE": "That case is not a warning and cannot be deleted.",
   "COMMAND_CASE_ADMIN_ONLY": "Only administrators can delete cases.",
   "COMMAND_CASE_DELETED": "Case `#{{caseId}}` has been deleted.",
-  "INVALID_CASE_ID": "I could not find a case matching `#{{caseId}}`",
+  "INVALID_CASE_ID": "I could not find a case matching `#{{caseId}}`.",
   "INVALID_PAGE_NUMBER": "`{{pageNumber}}` is not a valid page number.",
   "COMMAND_CASE_EMBED_TITLE": "Case #{{caseId}}",
   "LOG_EMBED_TITLE_CASE_ID": " | Case #{{caseId}}",
