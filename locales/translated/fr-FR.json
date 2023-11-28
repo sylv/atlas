@@ -383,7 +383,7 @@
   "TEMPERATURE": "Température",
   "COMMAND_WEATHER_EMBED_TEMPERATURE_VALUE": "{{temp}}°{{unit}}",
   "HUMIDITY": "Humidité",
-  "COMMAND_WEATHER_EMBED_HUMIDITY_VALUE": "Humidité",
+  "COMMAND_WEATHER_EMBED_HUMIDITY_VALUE": "{{humidity}}%",
   "WIND": "Vent",
   "COMMAND_WEATHER_EMBED_WIND_VALUE": "{{wind}}{{unit}}",
   "COMMAND_COOLDOWN_PREMIUM": "Cette commande est en cooldown pour {{time}}.",
