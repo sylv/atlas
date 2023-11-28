@@ -414,7 +414,7 @@
   "VALIDATION_MESSAGE_NO_CONTEXT_CHANNEL": "You must provide a channel id.",
   "VALIDATION_ROLE_INVALID": "Could not resolve `{{value}}` to a role.",
   "VALIDATION_ROLE_UNMANAGEABLE": "{{mention}} cannot be used as it is above me in role hierarchy.",
-  "VALIDATION_COLOUR_INVALID": "`{{value}}` is not a valid colour.",
+  "VALIDATION_COLOUR_INVALID": "`{{value}}` is not a valid color.",
   "VALIDATION_MEMBER_INVALID": "Could not resolve `{{value}}` to a member in this server.",
   "VALIDATION_TIME_INVALID": "`{{value}}` is not a valid time or duration.",
   "VALIDATION_USER_INVALID": "Could not resolve `{{value}}` to a user.",
