@@ -82,5 +82,12 @@ export const DEFAULT_SUGGESTION_TEMPLATE = `
 `.trim();
 
 export const DEFAULT_LEVEL_NOTIFICATION = `
-  Congratulations {user.mention}! You leveled up to level {user.level}{if;{user.reward}; and got the {role.mention allow_mention=false;{user.reward}} role}!
+{if;{user.rewards};
+    {=rewards;{[]}}
+    [#for;{=role};{user.rewards filter=added first=false}]
+        {=rewards;{push return;{$rewards};{role.mention allow_mention=false;{$role}}}}
+    [/for]
+}
+
+Congratulations {user.mention}! You leveled up to level {user.level}{if;{$rewards.0}; and got the {join;{$rewards};, } {if;{$rewards.1};roles;role}}!
 `.trim();
