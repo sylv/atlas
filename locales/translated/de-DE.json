@@ -509,5 +509,6 @@
   "COMMAND_ROLE_ADD_ERROR": "{{mention}} besitzt die Rolle {{role}} bereits.",
   "COMMAND_ROLE_REMOVE_ERROR": "{{mention}} beseitzt die Rolle {{role}} nicht.",
   "BOT_ROLE_HIERARCHY_ERROR": "Ich kann die Rolle {{role}} nicht anpassen, weil ich in der Rollenhierarchie unter ihr oder gleichgestellt bin oder mir die benötigte Berechtigung fehlt.",
-  "USER_ROLE_HIERARCHY_ERROR": "Du kannst die Rolle {{role}} nicht anpassen, weil du in der Rollenhierarchie unter ihr oder gleichgestellt bist."
+  "USER_ROLE_HIERARCHY_ERROR": "Du kannst die Rolle {{role}} nicht anpassen, weil du in der Rollenhierarchie unter ihr oder gleichgestellt bist.",
+  "POLL_FOOTER_ENDED": "Umfrage #{{pollId}} • Von {{author}}"
 }
