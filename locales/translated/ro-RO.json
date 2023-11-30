@@ -509,5 +509,6 @@
   "COMMAND_ROLE_ADD_ERROR": "{{mention}} are deja rolul {{role}}.",
   "COMMAND_ROLE_REMOVE_ERROR": "{{mention}} nu are rolul {{role}}.",
   "BOT_ROLE_HIERARCHY_ERROR": "Rolul {{role}} nu poate modificat deoarece sunt inferior sau egal în ierarhia de roluri sau îmi lipsesc permisiunile necesare.",
-  "USER_ROLE_HIERARCHY_ERROR": "Rolul {{role}} nu poate modificat deoarece îți sunt inferior sau egal în ierarhia de roluri."
+  "USER_ROLE_HIERARCHY_ERROR": "Rolul {{role}} nu poate modificat deoarece îți sunt inferior sau egal în ierarhia de roluri.",
+  "POLL_FOOTER_ENDED": "Sondaj #{{pollId}} • De {{author}}"
 }
