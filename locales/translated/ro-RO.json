@@ -114,7 +114,7 @@
   "LEGACY_PREFIX_EMBED_DESCRIPTION": "Atlas nu mai acceptă prefixul `{{prefix}}`. Discord [transferă boții](https://support-dev.discord.com/hc/en-us/articles/4404772028055-Message-Content-Privileged-Intent-for-Verified-Bots) către noile [Comenzi Slash](https://support. iscord.com/hc/en-us/articles/1500000368501-Slash-Commands-FAQ), care înlocuiește mesajele de comenzi cu prefix. Noul sistem este mai ușor de utilizat pentru cei care nu sunt familiarizați cu comenzile.\n\nPentru a începe, scrie `/` și o listă de comenzi pentru acest server va apărea. Dacă ai întrebări, nu ezita să le scrii în [serverul nostru de asistență](https://atlas.bot/support).",
   "LEGACY_PREFIX_EMBED_UNSYNCED_WARNING": "> Comenzile Slash încă nu sunt înregistrate în acest server. Vezi [acest ghid](https://docs.atlas.bot/tutorials/migrating-to-slash-commands) pentru a le înregistra în acest server.",
   "COMMAND_MUTE_ALREADY_MUTED": "{{mention}} este pe pauză timp de încă {{timeLeft}}.",
-  "COMMAND_MUTE_MUTED": "L-am pus în pauză pe {{mention}} timp de {{duration}}.",
+  "COMMAND_MUTE_MUTED": "{{mention}} a fost pus în pauză timp de {{duration}}.",
   "COMMAND_MUTE_TOO_LONG": "Nu poți pune în pauză membrii pentru atât de mult timp.",
   "COMMAND_MUTE_TOO_SHORT": "Nu poți pune în pauză membrii mai puțin de 30 de secunde.",
   "COMMAND_MUTE_ADMIN": "Nu poți pune în pauză administratorii.",
