@@ -24,18 +24,18 @@
   "dependencies": {
     "@atlasbot/core": "workspace:*",
     "@atlasbot/discord-utilities": "workspace:*",
-    "chrono-node": "^2.6.4",
-    "compromise": "^14.9.0",
-    "cron-parser": "^4.8.1"
+    "chrono-node": "^2.7.3",
+    "compromise": "^14.11.0",
+    "cron-parser": "^4.9.0"
   },
   "devDependencies": {
     "@atlasbot/configs": "workspace:*",
-    "@types/ms": "^0.7.31",
-    "@types/node": "^20.4.8",
-    "eslint": "^8.46.0",
+    "@types/ms": "^0.7.34",
+    "@types/node": "^20.10.5",
+    "eslint": "^8.56.0",
     "ms": "3.0.0-canary.1",
-    "tsup": "^7.2.0",
-    "typescript": "^5.1.6",
-    "vitest": "^0.33.0"
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
   }
 }

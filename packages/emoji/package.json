@@ -31,15 +31,15 @@
   },
   "devDependencies": {
     "@atlasbot/configs": "workspace:*",
-    "@types/node": "^20.4.8",
-    "@types/pngquant-bin": "^4.0.0",
-    "eslint": "^8.46.0",
-    "p-limit": "^4.0.0",
-    "p-retry": "^5.1.2",
-    "sharp": "^0.32.3",
-    "tsup": "^7.2.0",
-    "typescript": "^5.1.6",
-    "undici": "^5.23.0",
-    "vitest": "^0.33.0"
+    "@types/node": "^20.10.5",
+    "@types/pngquant-bin": "^4.0.2",
+    "eslint": "^8.56.0",
+    "p-limit": "^5.0.0",
+    "p-retry": "^6.2.0",
+    "sharp": "^0.33.1",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "undici": "^6.2.1",
+    "vitest": "^1.1.0"
   }
 }

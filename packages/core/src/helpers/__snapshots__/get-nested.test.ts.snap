@@ -1,19 +1,19 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`getNested > should not expose special properties 1`] = `"Attempt to access restricted key."`;
+exports[`getNested > should not expose special properties 1`] = `[Error: Attempt to access restricted key.]`;
 
-exports[`getNested > should not expose special properties 2`] = `"Attempt to access restricted key."`;
+exports[`getNested > should not expose special properties 2`] = `[Error: Attempt to access restricted key.]`;
 
-exports[`getNested > should not expose special properties 3`] = `"Attempt to access restricted key."`;
+exports[`getNested > should not expose special properties 3`] = `[Error: Attempt to access restricted key.]`;
 
-exports[`getNested > should not expose special properties 4`] = `"Attempt to access restricted key."`;
+exports[`getNested > should not expose special properties 4`] = `[Error: Attempt to access restricted key.]`;
 
-exports[`getNested > should throw or return undefined when trying to get other values from maps 1`] = `"Attempt to access restricted key."`;
+exports[`getNested > should throw or return undefined when trying to get other values from maps 1`] = `[Error: Attempt to access restricted key.]`;
 
-exports[`throwIfRestricted > should ignore case 1`] = `"Attempt to access restricted key."`;
+exports[`throwIfRestricted > should ignore case 1`] = `[Error: Attempt to access restricted key.]`;
 
-exports[`throwIfRestricted > should throw if key is a restricted property 1`] = `"Attempt to access restricted key."`;
+exports[`throwIfRestricted > should throw if key is a restricted property 1`] = `[Error: Attempt to access restricted key.]`;
 
-exports[`throwIfRestricted > should throw if key is a restricted property 2`] = `"Attempt to access restricted key."`;
+exports[`throwIfRestricted > should throw if key is a restricted property 2`] = `[Error: Attempt to access restricted key.]`;
 
-exports[`throwIfRestricted > should trim whitespace 1`] = `"Attempt to access restricted key."`;
+exports[`throwIfRestricted > should trim whitespace 1`] = `[Error: Attempt to access restricted key.]`;
