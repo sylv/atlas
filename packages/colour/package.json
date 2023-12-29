@@ -1,6 +1,6 @@
 {
   "name": "@atlasbot/colour",
-  "version": "10.5.12",
+  "version": "10.5.14",
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
