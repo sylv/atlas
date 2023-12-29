@@ -45,4 +45,3 @@ export const parseNumber = (input: string): number | null => {
   return null;
 };
 
-console.log(parseNumber('111372124383428608'));
