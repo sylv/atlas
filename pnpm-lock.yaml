@@ -218,8 +218,6 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(@types/node@20.10.5)
 
-  packages/razorback/pkg: {}
-
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:

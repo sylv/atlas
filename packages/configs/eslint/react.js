@@ -1,12 +1,8 @@
-/** @type {import('eslint').Linter.Config} */
-const config = {
+const { createConfig } = require('./helpers/create-config');
+
+module.exports = createConfig({
   plugins: ['react', 'react-hooks', 'jsx-a11y'],
-  extends: [
-    require.resolve('./base.js'),
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:jsx-a11y/recommended',
-  ],
+  extends: ['plugin:react/recommended', 'plugin:react-hooks/recommended', 'plugin:jsx-a11y/recommended'],
   settings: {
     react: {
       version: 'detect',
@@ -16,6 +12,4 @@ const config = {
     'react/prop-types': 'off',
     'react/display-name': 'off',
   },
-};
-
-module.exports = config;
+});
