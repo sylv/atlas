@@ -48,6 +48,7 @@
   "MISSING_USER_PERMISSIONS_CHANNEL": "You are missing the `{{permissions}}` {{count:permission,permissions}} to do that in {{channel}}.",
   "INTERACTIONS_MALFORMED_CUSTOM_ID": "That interaction is invalid.",
   "INTERACTIONS_UNKNOWN_CUSTOM_ID_HANDLER": "That interaction is no longer available.",
+  "INTERACTIONS_CUSTOM_ID_INVOKING_ID_MISMATCH": "Only the user who invoked that interaction can use it.",
   "RESTRICTION_WHITELISTED_CHANNEL_ERROR": "This is not one of the channels allowed to do that.",
   "RESTRICTION_WHITELISTED_CHANNEL_ERROR_FILTERED": "This is not one of the channels allowed to do that. Some of the channels allowed have been deleted, which may prevent everyone from accessing it.",
   "RESTRICTION_WHITELISTED_CHANNEL_ERROR_FILTERED_EMPTY": "This is not one of the channels allowed to do that. The channels that were allowed to do that have been deleted.",
@@ -371,6 +372,8 @@
   "COMMAND_TAG_CREATE_LIMIT_USER_PRIME": "You have hit the per-user limit of {{limit}} tags.",
   "COMMAND_TAG_CREATE_LIMIT_SERVER_REGULAR": "This server has hit limit of {{limit}} tags. Consider upgrading to Prime with `/prime about` to have your limit raised to `{{primeLimit}}`.",
   "COMMAND_TAG_CREATE_LIMIT_SERVER_PRIME": "This server has hit limit of {{limit}} tags.",
+  "COMMAND_TAG_ANONYMOUS_NOT_ALLOWED": "This tag is not allowed to be used anonymously.",
+  "COMMAND_TAG_ANONYMOUS_SUCCESS": "The tag was sent anonymously.",
   "COMMAND_TIME_TIMEZONE": "It is currently {{time}} for the timezone `{{timezone}}`.",
   "COMMAND_TIME_LOCATION": "The time is `{{time}}` in {{location}}.",
   "COMMAND_TIME_INVALID_INPUT": "`{{query}}` is not a location or timezone I could resolve.",
@@ -478,10 +481,13 @@
   "BLACKLISTED_EMBED_TITLE": "You are not allowed to use Atlas",
   "BLACKLISTED_EMBED_DESCRIPTION": "You have been banned from using Atlas. If you feel like this is a mistake, please [join our support server](https://atlas.bot/support) and ask for help.",
   "ACTION_COOLDOWN": "That action is on cooldown for another {{time}}.",
+  "ACTION_COOLDOWN_CHANNEL": "That action is on cooldown in this channel for another {{time}}.",
+  "ACTION_COOLDOWN_GUILD": "That action is on cooldown in this server for another {{time}}.",
   "TOO_MANY_POLL_OPTIONS": "Polls can only have up to {{max}} options.",
   "OPTION_TOO_LONG": "The poll option `{{option}}` is over the max option length of {{max}} characters.",
   "POLL_FOOTER_MULTIPLE_VOTE": "You may vote for multiple options • Poll #{{pollId}} • By {{author}}",
   "POLL_FOOTER_SINGLE_VOTE": "You may only vote for one option • Poll #{{pollId}} • By {{author}}",
+  "POLL_FOOTER_ENDED": "Poll #{{pollId}} • By {{author}}",
   "POLL_DESCRIPTION": "Ends {{time}}",
   "POLL_VOTE_SELECT_PLACEHOLDER": "I vote for...",
   "POLL_VOTE_ENDED": "Sorry, that poll has already ended.",
@@ -509,5 +515,6 @@
   "COMMAND_ROLE_ADD_ERROR": "{{mention}} already has the role {{role}}.",
   "COMMAND_ROLE_REMOVE_ERROR": "{{mention}} does not have the role {{role}}.",
   "BOT_ROLE_HIERARCHY_ERROR": "The role {{role}} cannot be modified as I am below or equal to it in role hierarchy or I am missing permissions to assign it.",
-  "USER_ROLE_HIERARCHY_ERROR": "The role {{role}} cannot be modified as you are below or equal to it in role hierarchy."
+  "USER_ROLE_HIERARCHY_ERROR": "The role {{role}} cannot be modified as you are below or equal to it in role hierarchy.",
+  "REWARD_ROLES": "Reward {{amount:Role,Roles}}"
 }
