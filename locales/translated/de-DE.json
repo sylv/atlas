@@ -283,7 +283,7 @@
   "REACTION_ROLES_LIMIT": "Sie haben bereits die maximale Anzahl an Rollen aus dieser Gruppe. Entfernen Sie eine Rolle, die Sie bereits haben, um Platz für diese zu schaffen.",
   "COMMAND_AVATAR_NO_BANNER": "Der aktuelle Server hat keinen festgelegten Banner.",
   "COMMAND_AVATAR_NO_ICON": "Der aktuelle Server hat kein festgelegtes Symbol.",
-  "COMMAND_AVATAR_EMBED_TITLE": "Hier klicken für Originalgröße.",
+  "COMMAND_AVATAR_EMBED_TITLE": "Hier klicken für Originalgröße!",
   "CREATED_AT": "Erstellt am",
   "COMMAND_CONVERT_UNITS": "`{{value}}` {{fromUnit}} sind `{{converted}}` {{toUnit}}.",
   "COMMAND_CONVERT_CURRENCY": "`{{fromSymbol}}{{value}}` {{fromCurrency}} sind `{{toSymbol}}{{converted}}` in {{toCurrency}} as of {{date}}.",
