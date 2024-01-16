@@ -79,6 +79,8 @@
   "CATEGORY": "Category",
   "RESOLUTION": "Resolution",
   "RESOLVES": "Resolves",
+  "MAIN_BOT_MISSING_EMBED_TITLE": "Main Bot Missing",
+  "MAIN_BOT_MISSING_EMBED_DESCRIPTION": "Sorry, Atlas must stay in the server for custom bots to work. Please add it back, or contact a moderator to do so.",
   "COMMAND_BAN_PURGED": "Purge-banned {{mention}}",
   "COMMAND_BAN_DURATION": " for {{duration}}",
   "COMMAND_BAN_REASON": " with reason `{{reason}}`",
