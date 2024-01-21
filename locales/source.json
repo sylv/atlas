@@ -435,6 +435,7 @@
   "TICKETS_TOPIC_WARNING": "- all messages sent to this channel are being recorded.",
   "TICKETS_CREATED": "Your ticket has been created - {{channel}}.",
   "TICKETS_CREATE_SCRIPT_ERROR": "An error occurred creating the ticket message.",
+  "TICKETS_CREATE_MAX_TICKETS": "You may only open {{count}} {{count:ticket,tickets}} at a time.",
   "TICKETS_CREATE_FOR_OTHER_USER_PERMISSION_ERROR": "Only support staff and administrators can create tickets for other users.",
   "VALIDATION_TICKET_INVALID_CHANNEL": "{{channel}} is not a ticket channel.",
   "VALIDATION_TICKET_INVALID": "`{{value}}` is not a ticket channel.",
