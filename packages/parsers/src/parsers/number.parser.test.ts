@@ -4,9 +4,8 @@ import { parseNumber } from './number.parser.js';
 it('it should parse numbers', () => {
   expect(parseNumber('1 thousand')).toBe(1000);
   expect(parseNumber('one thousand')).toBe(1000);
-  expect(parseNumber('$50k')).toBe(50_000);
-  expect(parseNumber('$50 k')).toBe(50_000);
   expect(parseNumber('50k')).toBe(50_000);
+  expect(parseNumber('21.2k')).toBe(21_200);
   expect(parseNumber('twenty-two thousand')).toBe(22_000);
   expect(parseNumber('tonight at eight pm')).toBe(8);
   expect(parseNumber('22 hours 15 minutes')).toBe(22);

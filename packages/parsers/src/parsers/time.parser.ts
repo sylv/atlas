@@ -107,15 +107,6 @@ export const parseRelativeTime = (input: string): number | null => {
 };
 
 /**
- * Parse a human time string to milliseconds, throwing if parsing failed.
- */
-export const human = (input: string): number => {
-  const relative = parseRelativeTime(input);
-  if (relative === null) throw new Error(`Could not parse "${input}" as a duration.`);
-  return relative;
-};
-
-/**
  * Strips prefixes like "of" from a value.
  * @example "to walk the dog in" -> "walk the dog"
  */
@@ -142,4 +133,34 @@ export const stripTimeFromInput = (result: TimeParseResult): [string, string] =>
     stripStringPrefixes(result.input.slice(0, Math.max(0, start))),
     stripStringPrefixes(result.input.slice(Math.max(0, end)).trim()),
   ];
+};
+
+/**
+ * Parse a time string. The input should be constant and not user-provided.
+ * @note If you are using a runtime with macro support (like bun), you should import this as a macro.
+ * @example
+ * class MyClass {
+ *   private static readonly TIMEOUT_MS = ms`10 minutes`;
+ * }
+ */
+export const ms = (strings: TemplateStringsArray) => {
+  const [string] = strings;
+  const result = parseRelativeTime(string);
+  if (result === null) throw new Error(`Failed to parse time string "${string}"`);
+  return result;
+};
+
+/**
+ * Parse a time string. The input should be constant and not user-provided.
+ * @note If you are using a runtime with macro support (like bun), you should import this as a macro.
+ * @example
+ * class MyClass {
+ *   private static readonly TIMEOUT_SECS = secs`10 minutes`;
+ * }
+ */
+export const secs = (strings: TemplateStringsArray) => {
+  const [string] = strings;
+  const result = parseRelativeTime(string);
+  if (result === null) throw new Error(`Failed to parse time string "${string}"`);
+  return result * 1000;
 };

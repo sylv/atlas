@@ -1,5 +1,5 @@
 import cron from 'cron-parser';
-import { human, parseAbsoluteDate } from './time.parser.js';
+import { ms, parseAbsoluteDate } from './time.parser.js';
 
 function parseTextSchedule(input: string, ref: Date): Date | undefined {
   const result = parseAbsoluteDate(input, ref);
@@ -25,17 +25,17 @@ function parseCronSchedule(input: string, ref: Date): Date | undefined {
   } catch {}
 }
 
-const MIN_SCHEDULE = human('1 minute');
-const MIN_ADDITION = human('2 minutes');
+const MIN_SCHEDULE_MS = ms`1 minute`;
+const MIN_ADDITION_MS = ms`2 minutes`;
 
 export function parseSchedule(input: string, ref = new Date()): Date | undefined {
   const textSchedule = parseTextSchedule(input, ref);
   if (textSchedule) {
     const diff = textSchedule.getTime() - ref.getTime();
-    if (diff < MIN_SCHEDULE) {
+    if (diff < MIN_SCHEDULE_MS) {
       // if the schedule is less than 1 minute away, add 2 minutes to it.
       // this is to punish users trying to get around the 1 minute minimum.
-      return new Date(ref.getTime() + MIN_ADDITION);
+      return new Date(ref.getTime() + MIN_ADDITION_MS);
     }
 
     return textSchedule;
@@ -50,9 +50,9 @@ export function parseSchedule(input: string, ref = new Date()): Date | undefined
     const nextSchedule = parseCronSchedule(input, cronSchedule);
     if (nextSchedule) {
       const diff = nextSchedule.getTime() - cronSchedule.getTime();
-      if (diff < MIN_SCHEDULE - 1000) {
+      if (diff < MIN_SCHEDULE_MS - 1000) {
         // -1000 just in case there is some weirdness
-        return new Date(cronSchedule.getTime() + MIN_ADDITION);
+        return new Date(cronSchedule.getTime() + MIN_ADDITION_MS);
       }
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "@atlasbot/parsers",
-  "version": "10.5.14",
+  "version": "10.5.15",
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
@@ -25,7 +25,6 @@
     "@atlasbot/core": "workspace:*",
     "@atlasbot/discord-utilities": "workspace:*",
     "chrono-node": "^2.7.3",
-    "compromise": "^14.11.0",
     "cron-parser": "^4.9.0"
   },
   "devDependencies": {
