@@ -135,6 +135,18 @@ export const stripTimeFromInput = (result: TimeParseResult): [string, string] =>
   ];
 };
 
+export const toMsOrThrow = (input: string): number => {
+  const result = parseRelativeTime(input);
+  if (result === null) throw new Error(`Failed to parse time string "${input}"`);
+  return result;
+};
+
+export const toSecsOrThrow = (input: string): number => {
+  const result = parseRelativeTime(input);
+  if (result === null) throw new Error(`Failed to parse time string "${input}"`);
+  return result * 1000;
+};
+
 /**
  * Parse a time string. The input should be constant and not user-provided.
  * @note If you are using a runtime with macro support (like bun), you should import this as a macro.
@@ -143,7 +155,7 @@ export const stripTimeFromInput = (result: TimeParseResult): [string, string] =>
  *   private static readonly TIMEOUT_MS = ms`10 minutes`;
  * }
  */
-export const ms = (strings: TemplateStringsArray) => {
+export const ms = (strings: TemplateStringsArray): number => {
   const [string] = strings;
   const result = parseRelativeTime(string);
   if (result === null) throw new Error(`Failed to parse time string "${string}"`);
@@ -158,7 +170,7 @@ export const ms = (strings: TemplateStringsArray) => {
  *   private static readonly TIMEOUT_SECS = secs`10 minutes`;
  * }
  */
-export const secs = (strings: TemplateStringsArray) => {
+export const secs = (strings: TemplateStringsArray): number => {
   const [string] = strings;
   const result = parseRelativeTime(string);
   if (result === null) throw new Error(`Failed to parse time string "${string}"`);
