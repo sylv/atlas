@@ -56,6 +56,7 @@ const LAX_NUMBER_REPLACE_REGEX = /,/g;
  * @param onlyNumber Whether the input must be exclusively a number. "10 hours" will return null if true, because "hours" is not part of a number.
  */
 export const parseNumber = (input: string, onlyNumber?: boolean): number | null => {
+  input = input.trim();
   if (LAX_NUMBER_REGEX.test(input)) {
     // regex is fast
     const result = Number(input.replaceAll(LAX_NUMBER_REPLACE_REGEX, ''));
