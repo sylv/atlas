@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use crate::error::EngineError;
+use crate::{error::EngineError, serializer::serialize_value};
 
 #[derive(Debug, Clone)]
 pub enum Value {
@@ -9,24 +9,14 @@ pub enum Value {
     Float(f64),
     Boolean(bool),
     Array(Vec<Value>),
+    Object(Vec<(String, Value)>),
 }
 
 // make it so println!() can be used with Value
 impl Display for Value {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Value::String(string) => write!(f, "{}", string),
-            Value::Integer(integer) => write!(f, "{}", integer),
-            Value::Float(float) => write!(f, "{}", float),
-            Value::Boolean(boolean) => write!(f, "{}", boolean),
-            Value::Array(array) => {
-                let mut string = String::new();
-                for value in array {
-                    string.push_str(&format!("{} ", value));
-                }
-                write!(f, "{}", string)
-            }
-        }
+        let result = serialize_value(self.clone());
+        write!(f, "{}", result)
     }
 }
 
@@ -38,6 +28,10 @@ impl TryInto<u64> for Value {
             Value::Integer(integer) => Ok(integer),
             Value::Float(float) => Ok(float as u64),
             Value::String(string) => string.parse().map_err(|_| EngineError::UnprocessableType),
+            Value::Object(_) => Err(EngineError::IncompatibleTypes {
+                from: self,
+                to: "u64".to_string(),
+            }),
             Value::Boolean(_) => Err(EngineError::IncompatibleTypes {
                 from: self,
                 to: "u64".to_string(),
@@ -58,6 +52,10 @@ impl TryInto<u32> for Value {
             Value::Integer(integer) => Ok(integer as u32),
             Value::Float(float) => Ok(float as u32),
             Value::String(string) => string.parse().map_err(|_| EngineError::UnprocessableType),
+            Value::Object(_) => Err(EngineError::IncompatibleTypes {
+                from: self,
+                to: "u32".to_string(),
+            }),
             Value::Boolean(_) => Err(EngineError::IncompatibleTypes {
                 from: self,
                 to: "u32".to_string(),
@@ -94,6 +92,10 @@ impl TryInto<bool> for Value {
                 from: self,
                 to: "bool".to_string(),
             }),
+            Value::Object(_) => Err(EngineError::IncompatibleTypes {
+                from: self,
+                to: "bool".to_string(),
+            }),
         }
     }
 }
@@ -114,6 +116,10 @@ impl TryInto<f64> for Value {
                 from: self,
                 to: "f64".to_string(),
             }),
+            Value::Object(_) => Err(EngineError::IncompatibleTypes {
+                from: self,
+                to: "f64".to_string(),
+            }),
         }
     }
 }
@@ -128,10 +134,14 @@ impl TryInto<String> for Value {
             Value::Float(float) => Ok(float.to_string()),
             Value::Boolean(boolean) => Ok(boolean.to_string()),
             Value::Array(values) => Ok(values
-                .into_iter()
+                .iter()
                 .map(|value| value.to_string())
                 .collect::<Vec<String>>()
                 .join("")),
+            Value::Object(_) => Err(EngineError::IncompatibleTypes {
+                from: self,
+                to: "String".to_string(),
+            }),
         }
     }
 }
@@ -146,6 +156,10 @@ impl TryInto<Vec<Value>> for Value {
             Value::Integer(integer) => Ok(vec![Value::Integer(integer)]),
             Value::Float(float) => Ok(vec![Value::Float(float)]),
             Value::Boolean(boolean) => Ok(vec![Value::Boolean(boolean)]),
+            Value::Object(_) => Err(EngineError::IncompatibleTypes {
+                from: self,
+                to: "Vec<Value>".to_string(),
+            }),
         }
     }
 }

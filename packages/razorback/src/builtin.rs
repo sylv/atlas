@@ -1,7 +1,7 @@
 use crate::error::EngineError;
-use crate::parser::Node;
 use crate::register::EngineRegister;
-use crate::value::Value;
+use crate::types::node::Node;
+use crate::types::value::Value;
 use crate::Interpreter;
 use rand::Rng;
 use razorback_derive::razorback_tag;
@@ -36,7 +36,7 @@ pub fn register_tags(register: &mut EngineRegister) {
     register.add_handler("add", add_tag);
     register.add_handler("length", length_tag);
     register.add_handler("for", |interpreter, children| {
-        let iterations = 10000;
+        let iterations = 10;
         let mut result = Vec::new();
         for _ in 0..iterations {
             for child in children {

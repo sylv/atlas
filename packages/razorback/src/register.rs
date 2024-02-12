@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 extern crate proc_macro;
-use crate::{error::EngineError, interpreter::Interpreter, parser::Node, value::Value};
+use crate::{error::EngineError, interpreter::Interpreter, types::node::Node, types::value::Value};
 
 type TagHandler = fn(&mut Interpreter, &Vec<Node>) -> Result<Option<Value>, EngineError>;
 

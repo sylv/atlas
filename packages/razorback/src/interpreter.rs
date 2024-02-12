@@ -1,6 +1,11 @@
 use std::collections::HashMap;
 
-use crate::{error::EngineError, parser::Node, register::EngineRegister, value::Value};
+use crate::{
+    error::EngineError,
+    register::EngineRegister,
+    serializer::serialize_value,
+    types::{node::Node, value::Value},
+};
 
 pub struct Interpreter {
     variables: HashMap<String, Value>,
@@ -17,7 +22,7 @@ impl Interpreter {
 
     pub fn interpret_string(&mut self, value: &Node) -> Result<Option<String>, EngineError> {
         let value = self.interpret_raw(value)?;
-        value.map(|value| value.try_into()).transpose()
+        Ok(value.map(serialize_value))
     }
 
     pub fn interpret_raw(&mut self, value: &Node) -> Result<Option<Value>, EngineError> {
@@ -78,6 +83,17 @@ impl Interpreter {
                 }
 
                 Ok(Some(Value::Array(result)))
+            }
+            Node::Object(children) => {
+                let mut result: Vec<(String, Value)> = Vec::new();
+                for (key, value) in children {
+                    let value = self.interpret_raw(value)?;
+                    if let Some(value) = value {
+                        result.push((key.to_string(), value));
+                    }
+                }
+
+                Ok(Some(Value::Object(result)))
             }
             value => unimplemented!("{:?}", value),
         }
