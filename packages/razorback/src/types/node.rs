@@ -5,25 +5,20 @@ use pest_derive::Parser;
 pub enum Node<'a> {
     Value(Vec<Node<'a>>),
     Text(&'a str),
-    // {name option=child1;child2;child3}
-    Tag {
+    Boolean(bool),
+    Integer(u64),
+    Float(f64),
+    Template(Vec<Node<'a>>),
+    Call {
         name: &'a str,
+        options: Vec<(&'a str, Node<'a>)>,
         children: Vec<Node<'a>>,
     },
-    // option="child1 {child2}"
-    TagOption {
+    Assign {
         name: &'a str,
         value: Box<Node<'a>>,
     },
-    // {=name;value}
-    VariableAssignment {
-        name: &'a str,
-        value: Box<Node<'a>>,
-    },
-    // {$name}
-    VariableReference(&'a str),
-    // {[child1;child2;child3]}
+    Reference(&'a str),
     Array(Vec<Node<'a>>),
     Object(Vec<(&'a str, Node<'a>)>),
-    Comment(&'a str),
 }

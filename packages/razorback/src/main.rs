@@ -3,7 +3,6 @@ use builtin::register_tags;
 use crate::interpreter::Interpreter;
 use crate::parser::*;
 use crate::register::EngineRegister;
-use crate::serializer::serialize_node;
 
 mod builtin;
 mod error;
@@ -14,10 +13,7 @@ mod serializer;
 mod types;
 
 fn main() {
-    let input = r#"{{ 
-        "key": "value", 
-        "nested": { "key": "{key;value}" } 
-    }}"#;
+    let input = r#"{echo `template {{echo "test"}}`}"#;
 
     // setup register
     let mut register = EngineRegister::new();
@@ -33,18 +29,12 @@ fn main() {
     if let Err(err) = result {
         println!("Error: {}", err);
     } else if let Ok(result) = result {
-        println!("Run in {:?}", start.elapsed());
-        let serialized = serialize_node(&script);
-        println!("Serialized matches: {}", serialized == input);
-
         if let Some(result) = result {
             println!("{}", result);
         } else {
             println!("No result");
         }
 
-        if serialized != input {
-            println!("Serialized: {}", serialized);
-        }
+        println!("Run in {:?}", start.elapsed());
     }
 }

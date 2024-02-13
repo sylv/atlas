@@ -31,12 +31,18 @@ pub fn length_tag(value: Value) -> Result<Option<Value>, EngineError> {
     Ok(Some(Value::Integer(length as u64)))
 }
 
+#[razorback_tag]
+pub fn echo_tag(value: Value) -> Result<Option<Value>, EngineError> {
+    Ok(Some(value))
+}
+
 pub fn register_tags(register: &mut EngineRegister) {
     register.add_handler("randomInt", random_int_tag);
     register.add_handler("add", add_tag);
     register.add_handler("length", length_tag);
+    register.add_handler("echo", echo_tag);
     register.add_handler("for", |interpreter, children| {
-        let iterations = 10;
+        let iterations = 1_000_000;
         let mut result = Vec::new();
         for _ in 0..iterations {
             for child in children {

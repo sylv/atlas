@@ -1,51 +1,44 @@
-WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+WHITESPACE    = _{ " " | "\t" | NEWLINE }
+COMMENT       = _{ COMMENT_LINE | COMMENT_BLOCK }
+COMMENT_LINE  = _{ "//" ~ (!NEWLINE ~ ANY)* ~ NEWLINE }
+COMMENT_BLOCK = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/" }
 
-tag        = @{ "{" ~ name ~ tag_option* ~ tag_param* ~ "}" }
-tag_param  = @{ ";" ~ value }
-tag_option = @{ " " ~ name ~ "=" ~ value }
+script = _{ SOI ~ (tag | outer)* ~ EOI }
+outer  = @{ (!("{" | "//") ~ ANY)+ }
 
-array = @{
-    "{[" ~ "]}"
-  | "{[" ~ value ~ (";" ~ value)* ~ "]}"
-}
-
-// object tags are basically JSON objects without the quotes and with commas at the end being optional
-// {{ key: 'value', key2: true, }}
-object       = { "{" ~ object_inner ~ "}" }
-object_inner = {
-    "{" ~ "}"
-  | "{" ~ object_entry ~ ("," ~ object_entry)* ~ "}"
-}
-
-object_entry = {
-    object_string ~ ":" ~ object_value
-}
-
-object_value        = _{ object_inner | object | object_array | object_string | object_number | object_boolean | object_null | tag | variable_reference }
-object_array        =  {
-    "[" ~ "]"
-  | "[" ~ object_value ~ ("," ~ object_value)* ~ "]"
-}
-object_string       = ${ "\"" ~ object_string_inner ~ "\"" }
-object_string_inner = @{ object_string_char* }
-object_string_char  =  {
-    !("\"" | "\\") ~ ANY
-  | "\\" ~ ("\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t")
-  | "\\" ~ ("u" ~ ASCII_HEX_DIGIT{4})
-}
-object_number       = @{
-    "-"? ~ ("0" | ASCII_NONZERO_DIGIT ~ ASCII_DIGIT*) ~ ("." ~ ASCII_DIGIT*)? ~ (^"e" ~ ("+" | "-")? ~ ASCII_DIGIT+)?
-}
-object_boolean      =  { "true" | "false" }
-object_null         =  { "null" }
-
-variable_assign    = @{ "{=" ~ name ~ tag_param* ~ "}" }
-variable_reference = @{ "{$" ~ name ~ "}" }
-
-// tag, param etc names
 name = @{ (ASCII_ALPHANUMERIC | "_" | ".")+ }
 
-text    = @{ (WHITE_SPACE | ASCII_ALPHANUMERIC | NEWLINE | "!" | "_" | ":" | "," | "\"")+ }
-comment = @{ "//" ~ (!NEWLINE ~ ANY)* ~ NEWLINE? }
+tag = _{ "{" ~ (assign | reference | call) ~ "}" }
 
-value = _{ (object | array | tag | variable_assign | variable_reference | comment | text)* }
+option = { name ~ "=" ~ value }
+call   = { name ~ (option)? ~ value* }
+
+assign    = { "=" ~ name }
+reference = { "$" ~ name }
+
+string = ${ "\"" ~ string_inner ~ "\"" }
+string_inner  = @{ string_char* }
+string_char   =  {
+    !("\"" | "\\") ~ ANY
+  | "\\" ~ ("\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t")
+}
+
+boolean =  { "true" | "false" }
+number  = @{ ("-"? ~ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)?) }
+null    =  { "null" }
+
+array = { "[" ~ value? ~ ("," ~ value)*? ~ "]" }
+
+object = {
+    "{" ~ "}"
+  | "{" ~ pair ~ ("," ~ pair)* ~ "}"
+}
+pair   = { (name | string) ~ ":" ~ value }
+
+// `text {{tag}} {"string in a string for some reason"}`
+template            = _{ "`" ~ template_inner ~ "`" }
+template_inner      =  { (template_expression | template_string)* }
+template_string     =  ${ (!("`" | "{") ~ ANY)+ }
+template_expression = _{ "{" ~ value ~ "}" }
+
+value = _{ (object | tag | array | template | string | number | boolean | reference | null) }

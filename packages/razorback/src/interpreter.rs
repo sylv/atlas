@@ -22,12 +22,11 @@ impl Interpreter {
 
     pub fn interpret_string(&mut self, value: &Node) -> Result<Option<String>, EngineError> {
         let value = self.interpret_raw(value)?;
-        Ok(value.map(serialize_value))
+        Ok(value.map(|v| serialize_value(v, true)))
     }
 
     pub fn interpret_raw(&mut self, value: &Node) -> Result<Option<Value>, EngineError> {
         match value {
-            Node::Comment(_) => Ok(None),
             Node::Value(parts) => {
                 let mut result = Vec::new();
                 for part in parts {
@@ -47,7 +46,23 @@ impl Interpreter {
                 Ok(Some(Value::Array(result)))
             }
             Node::Text(text) => Ok(Some(Value::String(text.to_string()))),
-            Node::Tag { name, children } => {
+            Node::Template(children) => {
+                // `text {{tag}} {"value"}`
+                let mut result = String::new();
+                for child in children {
+                    let value = self.interpret_string(child)?;
+                    if let Some(value) = value {
+                        result.push_str(&value);
+                    }
+                }
+
+                Ok(Some(Value::String(result)))
+            }
+            Node::Call {
+                name,
+                options,
+                children,
+            } => {
                 let function = self.register.get_handler(name);
                 if let Some(function) = function {
                     return function(self, children);
@@ -55,7 +70,7 @@ impl Interpreter {
 
                 Err(EngineError::UnknownTag(name.to_string()))
             }
-            Node::VariableAssignment { name, value } => {
+            Node::Assign { name, value } => {
                 let value = self.interpret_raw(value)?;
                 if let Some(value) = value {
                     self.variables.insert(name.to_string(), value);
@@ -65,7 +80,7 @@ impl Interpreter {
 
                 Ok(None)
             }
-            Node::VariableReference(name) => {
+            Node::Reference(name) => {
                 let value = self.variables.get(&name.to_string());
                 if let Some(value) = value {
                     Ok(Some(value.clone()))

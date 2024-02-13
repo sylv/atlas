@@ -15,7 +15,7 @@ pub enum Value {
 // make it so println!() can be used with Value
 impl Display for Value {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let result = serialize_value(self.clone());
+        let result = serialize_value(self.clone(), false);
         write!(f, "{}", result)
     }
 }
