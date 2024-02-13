@@ -13,12 +13,12 @@ tag = _{ "{" ~ (assign | reference | call) ~ "}" }
 option = { name ~ "=" ~ value }
 call   = { name ~ (option)? ~ value* }
 
-assign    = { "=" ~ name }
+assign    = { "=" ~ name ~ value }
 reference = { "$" ~ name }
 
-string = ${ "\"" ~ string_inner ~ "\"" }
-string_inner  = @{ string_char* }
-string_char   =  {
+string       = ${ "\"" ~ string_inner ~ "\"" }
+string_inner = @{ string_char* }
+string_char  =  {
     !("\"" | "\\") ~ ANY
   | "\\" ~ ("\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t")
 }
@@ -38,7 +38,7 @@ pair   = { (name | string) ~ ":" ~ value }
 // `text {{tag}} {"string in a string for some reason"}`
 template            = _{ "`" ~ template_inner ~ "`" }
 template_inner      =  { (template_expression | template_string)* }
-template_string     =  ${ (!("`" | "{") ~ ANY)+ }
+template_string     = ${ (!("`" | "{") ~ ANY)+ }
 template_expression = _{ "{" ~ value ~ "}" }
 
 value = _{ (object | tag | array | template | string | number | boolean | reference | null) }
