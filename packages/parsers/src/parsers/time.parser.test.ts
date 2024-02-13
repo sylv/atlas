@@ -56,6 +56,11 @@ it('should parse unix timestamps in seconds and milliseconds', () => {
   // valid timestamps, but with garbage surrounding it that could mean its a bad match
   expect(parseAbsoluteDate('1623125364a')).toBeNull();
   expect(parseAbsoluteDate('a1623125364')).toBeNull();
+
+  // chrono-node was matching "them" as 1 minute somehow.
+  expect(
+    parseRelativeTime(`New Server Booster: <@245332854769319937>! Don't forget to give them points in 7 days.`),
+  ).toBe(6.048e8);
 });
 
 it('should still parse with chrono when invalid timestamps are extracted', () => {

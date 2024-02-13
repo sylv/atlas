@@ -25,6 +25,49 @@ const ALIASES = new Map<string, string>([
   ['mo', 'month'],
 ]);
 
+const MUST_INCLUDE_WORDS = [
+  'sec',
+  'min',
+  'hour',
+  'day',
+  'week',
+  'month',
+  'year',
+  'jan',
+  'feb',
+  'mar',
+  'apr',
+  'may',
+  'jun',
+  'jul',
+  'aug',
+  'sep',
+  'oct',
+  'nov',
+  'dec',
+  'pm',
+  'am',
+  'mon',
+  'tue',
+  'wed',
+  'thu',
+  'fri',
+  'sat',
+  'sun',
+  'tomorrow',
+  'yesterday',
+  'today',
+  'now',
+  'ago',
+  'next',
+  'last',
+  'until',
+  'to',
+  'in',
+];
+
+const MUST_INCLUDE_PATTERN = new RegExp(`[0-9]|(${MUST_INCLUDE_WORDS.join('|')})`, 'iu');
+
 /**
  * Returns true if the date is essentially invalid
  * Checks for actual invalid dates, dates too close to the
@@ -79,7 +122,7 @@ export const parseTime = (input: string, ref = new Date()): TimeParseResult | un
 
   clean = clean.trim();
   const matches = parse(clean, ref, { forwardDate: true });
-  const match = matches.shift();
+  const match = matches.find((match) => MUST_INCLUDE_PATTERN.test(match.text));
   if (!match) return;
   return {
     absolute: match.date(),

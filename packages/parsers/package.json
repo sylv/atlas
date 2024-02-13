@@ -24,7 +24,7 @@
   "dependencies": {
     "@atlasbot/core": "workspace:*",
     "@atlasbot/discord-utilities": "workspace:*",
-    "chrono-node": "^2.7.3",
+    "chrono-node": "^2.7.5",
     "cron-parser": "^4.9.0"
   },
   "devDependencies": {
