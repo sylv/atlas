@@ -1,6 +1,6 @@
 WHITESPACE    = _{ " " | "\t" | NEWLINE }
 COMMENT       = _{ COMMENT_LINE | COMMENT_BLOCK }
-COMMENT_LINE  = _{ "//" ~ (!NEWLINE ~ ANY)* ~ NEWLINE }
+COMMENT_LINE  = _{ "//" ~ (!NEWLINE ~ ANY)* ~ NEWLINE? }
 COMMENT_BLOCK = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/" }
 
 script = _{ SOI ~ (tag | outer)* ~ EOI }
