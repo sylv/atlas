@@ -474,7 +474,7 @@
   "SUGGESTION_DOWNVOTE_COUNT": "Downvote ({{count}})",
   "SUGGESTION_DOWNVOTE": "Downvote",
   "SUGGESTION_NOT_PENDING": "That suggestion has already been approved or denied.",
-  "SUGGESTIONS_NONE_PENDING_": "There are no pending suggestions.",
+  "SUGGESTIONS_NONE_PENDING": "There are no pending suggestions.",
   "SETUP_COMMAND_EMBED_TITLE": "Atlas Setup",
   "SETUP_COMMAND_EMBED_DESCRIPTION": "Setup is done on the [dashboard]({{link}}). When you enable plugins, commands they provide will be added to the server. Disabling commands or plugins will remove them from the server.\n\nFor more information please [read the documentation](https://docs.atlas.bot) or [join our support server](https://atlas.bot/support).",
   "CLICK_TO_GET_ROLES": "Click to get roles",
