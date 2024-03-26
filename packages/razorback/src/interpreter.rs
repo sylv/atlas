@@ -110,6 +110,7 @@ impl Interpreter {
 
                 Ok(Some(Value::Object(result)))
             }
+            Node::EOI() => Ok(None),
             value => unimplemented!("{:?}", value),
         }
     }
