@@ -198,6 +198,7 @@
   "COMMAND_XKCD_NOT_FOUND": "I could not find an XKCD comic by name or id matching matching your query.",
   "COMMAND_XKCD_FOOTER": "Comic {{id}}",
   "COMMAND_LEADERBOARD": "[Click here]({{link}}) to view the servers leaderboard.",
+  "COMMAND_LEADERBOARD_NO_USERS": "The leaderboard in this server is empty.",
   "LEVEL": "Level",
   "RANK": "Rank",
   "COMMAND_SETLEVEL_NO_OPTIONS": "You must specify a level or a rank.",
