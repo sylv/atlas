@@ -3,7 +3,7 @@ use pest::error::Error;
 use pest::{iterators::Pair, Parser};
 
 pub fn parse_to_node(script: &str) -> Result<Node, Error<Rule>> {
-    let value = Node::parse(Rule::value, script).unwrap();
+    let value = Node::parse(Rule::script, script).unwrap();
     let value = Node::Value(value.map(parse_pair).collect());
     Ok(value)
 }
@@ -73,6 +73,8 @@ fn parse_pair(pair: Pair<Rule>) -> Node {
                 Node::Integer(pair.as_str().parse().unwrap())
             }
         }
+        Rule::script => Node::Value(pair.into_inner().map(parse_pair).collect()),
+        Rule::EOI => Node::EOI(),
         _ => unreachable!("Unknown rule {:?}", pair.as_rule()),
     }
 }
