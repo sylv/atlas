@@ -13,7 +13,6 @@
     "forceConsistentCasingInFileNames": false,
     "noEmitOnError": true,
     "stripInternal": true,
-		"exactOptionalPropertyTypes": true,
 
     // modules
 		"module": "ESNext",

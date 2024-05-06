@@ -1,6 +1,6 @@
 {
   "name": "@atlasbot/configs",
-  "version": "10.5.16",
+  "version": "10.6.1",
   "license": "AGPL-3.0",
   "publishConfig": {
     "access": "public"
@@ -10,8 +10,8 @@
     "url": "https://github.com/sylv/atlas.git"
   },
   "exports": {
-    "./biome/default": "./biome/default.json",
-    "./tsconfig/esm": "./tsconfig/esm.json"
+    "./biome": "./biome/default.json",
+    "./tsconfig": "./tsconfig/default.json"
   },
   "files": [
     "tsconfig",

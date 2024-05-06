@@ -15,6 +15,7 @@
     "test": "turbo run test"
   },
   "devDependencies": {
+    "@atlasbot/configs": "^10.6.0",
     "@biomejs/biome": "^1.7.2",
     "tsup": "^8.0.2",
     "turbo": "^1.13.3"
