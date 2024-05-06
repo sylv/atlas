@@ -1,9 +1,4 @@
 {
   "editor.formatOnSave": true,
-  "npm.packageManager": "pnpm",
-  "eslint.workingDirectories": [
-    {
-      "pattern": "./{packages,apps}/*"
-    }
-  ]
+  "npm.packageManager": "pnpm"
 }

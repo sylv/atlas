@@ -1,0 +1,99 @@
+{
+    "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
+    "organizeImports": {
+      "enabled": true
+    },
+    "formatter": {
+      "lineWidth": 110,
+      "indentStyle": "space"
+    },
+    "linter": {
+      "enabled": true,
+      "rules": {
+        "recommended": true,
+        "style": {
+          "useImportType": "off",
+          "noNonNullAssertion": "off",
+          "noParameterAssign": "off",
+          "useTemplate": "off",
+          "noInferrableTypes": "off",
+          "noUselessElse": "off",
+          "useDefaultParameterLast": "off",
+          "useNodejsImportProtocol": "off"
+        },
+        "correctness": {
+          "useExhaustiveDependencies": "off",
+          "noUnsafeFinally": "off"
+        },
+        "suspicious": {
+          "noExplicitAny": "off",
+          "noDoubleEquals": "off",
+          "noConfusingVoidType": "off",
+          "noAssignInExpressions": "off",
+          "noMisleadingCharacterClass": "off",
+          "noUnsafeDeclarationMerging": "off"
+        },
+        "performance": {
+          "noDelete": "off"
+        },
+        "complexity": {
+          "useOptionalChain": "off",
+          "noBannedTypes": "off",
+          "useLiteralKeys": "off",
+          "noUselessSwitchCase": "off"
+        },
+        "security": {
+          "noDangerouslySetInnerHtml": "off"
+        },
+        "a11y": {
+          "useKeyWithClickEvents": "off",
+          "useAltText": "warn",
+          "noRedundantAlt": "off"
+        }
+      }
+    },
+    "javascript": {
+      "parser": {
+        "unsafeParameterDecoratorsEnabled": true
+      }
+    },
+    "overrides": [
+      {
+        "include": [
+          "**/@generated/**",
+          "**/generated/**",
+          "**/migrations/**"
+        ],
+        "linter": {
+          "enabled": false
+        },
+        "organizeImports": {
+          "enabled": false
+        },
+        "formatter": {
+          "enabled": false
+        }
+      },
+      {
+        "include": [
+          "*.entity.*",
+          "*.embeddable.*"
+        ],
+        "formatter": {
+          "lineWidth": 140
+        }
+      },
+      {
+        "include": [
+          "**/*.tsx"
+        ],
+        "linter": {
+          "rules": {
+            "style": {
+              "useImportType": "error"
+            }
+          }
+        }
+      }
+    ]
+  }

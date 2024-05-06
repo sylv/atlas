@@ -2,11 +2,11 @@
   "name": "atlas",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@8.0.0",
+  "packageManager": "pnpm@9.0.6",
   "license": "AGPL-3.0",
   "engines": {
     "node": ">=20",
-    "pnpm": ">=8"
+    "pnpm": ">=9"
   },
   "scripts": {
     "clean": "rm -rf ./packages/*/{tsconfig.tsbuildinfo,lib,dist,yarn-error.log,.next}",
@@ -15,9 +15,8 @@
     "test": "turbo run test"
   },
   "devDependencies": {
-    "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.11",
+    "@biomejs/biome": "^1.7.2",
     "tsup": "^8.0.2",
-    "turbo": "^1.12.4"
+    "turbo": "^1.13.3"
   }
 }
