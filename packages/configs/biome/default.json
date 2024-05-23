@@ -19,7 +19,8 @@
           "noInferrableTypes": "off",
           "noUselessElse": "off",
           "useDefaultParameterLast": "off",
-          "useNodejsImportProtocol": "off"
+          "useNodejsImportProtocol": "off",
+          "noUnusedTemplateLiteral": "off"
         },
         "correctness": {
           "useExhaustiveDependencies": "off",
