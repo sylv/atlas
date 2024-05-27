@@ -460,6 +460,7 @@
   "SUGGESTION_RESPONDER_NOT_CONFIGURED": "The suggestion template did not configure the context responder with an embed with a description.",
   "MISSING_SUGGESTION_APPROVAL_ROLE": "You are missing the {{role}} role required to approve suggestions.",
   "MISSING_SUGGESTION_MANAGEMENT_ROLE": "You are missing the {{role}} role required to manage suggestions.",
+  "MISSING_SUGGESTION_VERIFICATION_CHANNEL": "This server has not configured a suggestion verification channel.",
   "SUGGESTION_NOT_FOUND": "I could not find a suggestion with that ID.",
   "SUGGESTION_NO_VOTES": "That suggestion has no votes.",
   "SUGGESTION_CONTENT_UNRESOLVABLE": "I could not extract the suggestion content from the message.",
