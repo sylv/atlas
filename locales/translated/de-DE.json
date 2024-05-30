@@ -460,6 +460,7 @@
   "SUGGESTION_RESPONDER_NOT_CONFIGURED": "In der Vorschlagsvorlage wurde keine Einbettung mit Beschreibung konfiguriert.",
   "MISSING_SUGGESTION_APPROVAL_ROLE": "Sie verfügen über die erforderliche Rolle {{role}}, um Vorschläge zu genehmigen.",
   "MISSING_SUGGESTION_MANAGEMENT_ROLE": "Ihnen fehlt die {{role}} Rolle, um Vorschläge zu verwalten.",
+  "MISSING_SUGGESTION_VERIFICATION_CHANNEL": "Dieser Server hat keinen Vorschlags Verifikationskanal konfiguriert.",
   "SUGGESTION_NOT_FOUND": "Ich konnte keinen Vorschlag mit dieser ID finden.",
   "SUGGESTION_NO_VOTES": "Dieser Vorschlag hat keine Stimmabgabe.",
   "SUGGESTION_CONTENT_UNRESOLVABLE": "Ich konnte den Vorschlaginhalt nicht aus der Nachricht extrahieren.",
