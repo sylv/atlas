@@ -181,12 +181,6 @@
   "COMMAND_VOTE": "You can support Atlas by voting for the bot, and as a reward get Supporter perks for 24 hours. [Click here for more info]({{link}}).",
   "COMMAND_DICE": "You rolled a `{{result}}`",
   "COMMAND_DICE_EXTRA": "You rolled a `{{result}}` ({{extra}})",
-  "COMMAND_REDDIT_EXPLICIT": "Explicit posts are not allowed in this channel. Switch to an NSFW channel to use the NSFW option.",
-  "COMMAND_REDDIT_INVALID": "`{{input}}` is not a valid subreddit or user.",
-  "COMMAND_REDDIT_REQUEST_FAILED": "Something went wrong making the request to Reddit.",
-  "COMMAND_REDDIT_NO_POSTS": "There are no posts in that feed matching your filters.",
-  "COMMAND_REDDIT_FOOTER": "{{upvotes}} upvotes, {{comments}} comments",
-  "COMMAND_REDDIT_VIDEO": "[Click here to view the posts video]({{link}})",
   "COMMAND_TICTACTOE_NOT_A_PLAYER": "You are not a player in that game.",
   "COMMAND_TICTACTOE_INVALID_CELL": "The position you picked is invalid.",
   "COMMAND_TICTACTOE_NOT_YOUR_TURN": "It is not your turn.",
@@ -527,5 +521,6 @@
   "COMMAND_ROLE_REMOVE_ERROR": "{{mention}} does not have the role {{role}}.",
   "BOT_ROLE_HIERARCHY_ERROR": "The role {{role}} cannot be modified as I am below or equal to it in role hierarchy or I am missing permissions to assign it.",
   "USER_ROLE_HIERARCHY_ERROR": "The role {{role}} cannot be modified as you are below or equal to it in role hierarchy.",
-  "REWARD_ROLES": "Reward {{amount:Role,Roles}}"
+  "REWARD_ROLES": "Reward {{amount:Role,Roles}}",
+  "COMMAND_PROVIDED_FLAGS": "Provided Flags"
 }
