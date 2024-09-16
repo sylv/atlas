@@ -11,13 +11,12 @@
   },
   "exports": {
     "./biome": "./biome/default.json",
-    "./tsconfig": "./tsconfig/default.json"
+    "./biome/default.json": "./biome/default.json",
+    "./tsconfig": "./tsconfig/default.json",
+    "./tsconfig/default.json": "./tsconfig/default.json"
   },
   "files": [
     "tsconfig",
     "biome"
-  ],
-  "dependencies": {
-    "@tsconfig/node-lts": "^20.1.3"
-  }
+  ]
 }

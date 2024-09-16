@@ -46,11 +46,7 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.12.8)
 
-  packages/configs:
-    dependencies:
-      '@tsconfig/node-lts':
-        specifier: ^20.1.3
-        version: 20.1.3
+  packages/configs: {}
 
   packages/core:
     dependencies:
