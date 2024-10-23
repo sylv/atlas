@@ -48,7 +48,7 @@ const UNIT_WITH_NUMBER_REGEX = new RegExp(`\\b(?<number>[0-9\\.\\,]+)(?<unit>${S
 const SPLIT_REGEX = /[ -]+/;
 
 // https://regex101.com/r/WGM10R/1
-const LAX_NUMBER_REGEX = /^\d+(?:(?:,\d{3})+)?(?:\.\d+)?$/;
+const LAX_NUMBER_REGEX = /^-?\d+(?:(?:,\d{3})+)?(?:\.\d+)?$/;
 const LAX_NUMBER_REPLACE_REGEX = /,/g;
 
 /**

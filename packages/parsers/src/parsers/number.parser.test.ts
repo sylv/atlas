@@ -2,6 +2,7 @@ import { expect, it } from 'vitest';
 import { parseNumber } from './number.parser.js';
 
 it('it should parse numbers', () => {
+  expect(parseNumber('-10')).toBe(-10);
   expect(parseNumber('1 thousand')).toBe(1000);
   expect(parseNumber('one thousand')).toBe(1000);
   expect(parseNumber('50k')).toBe(50_000);

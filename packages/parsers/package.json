@@ -1,6 +1,6 @@
 {
   "name": "@atlasbot/parsers",
-  "version": "10.5.19",
+  "version": "10.5.20",
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
