@@ -68,6 +68,7 @@
   "PUNISHMENT_ERROR_CANNOT_PUNISH_SUPERIOR": "You cannot punish users that are above you in role hierarchy.",
   "PUNISHMENT_ERROR_CANNOT_PUNISH_OTHER_BOT": "You cannot punish other bots.",
   "PUNISHMENT_ERROR_CANNOT_PUNISH_BOT": "You cannot punish me.",
+  "PUNISHMENT_ERROR_HIERARCHY": "You can punish that user, but I cannot. Make sure I have a higher role than the user you want to punish.",
   "COMMAND_MISSING_OPTIONS_DURATION": "You must specify a duration.",
   "COMMAND_MISSING_OPTIONS_REASON": "You must specify a reason.",
   "TEXT_CHANNEL": "Text Channel",
