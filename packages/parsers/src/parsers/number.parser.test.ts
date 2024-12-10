@@ -13,6 +13,7 @@ it('it should parse numbers', () => {
   expect(parseNumber('10,100.20')).toBe(10_100.2);
   expect(parseNumber('10,10')).toBeNull();
   expect(parseNumber('2,000')).toBe(2000);
+  expect(parseNumber('5.')).toBe(5);
   expect(parseNumber('\n200\n')).toBe(200);
 });
 
