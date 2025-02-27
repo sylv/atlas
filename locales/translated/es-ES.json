@@ -454,7 +454,7 @@
   "TICKET_DATE_OPENED": "Fecha de apertura",
   "TICKET_OPEN_REASON": "Motivo de la apertura",
   "TICKET_CLOSE_REASON": "Motivo del cierre",
-  "UNSERIALIZABLE_ERROR": "Se ha producido un error que no puede ser representado como texto.",
+  "UNSERIALIZABLE_ERROR": "Ocurrió un error que no puede ser representado como texto.",
   "PENDING_SUGGESTION": "Sugerencia pendiente",
   "APPROVED_SUGGESTION": "Sugerencia aprobada",
   "DENIED_SUGGESTION": "Sugerencia rechazada",
