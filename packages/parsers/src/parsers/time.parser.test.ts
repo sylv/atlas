@@ -17,6 +17,16 @@ it('should parse relative durations', () => {
   expect(parseRelativeTime('1h 2m')).toBe(ms('1h') + ms('2m'));
 });
 
+it('should parse decades', () => {
+  const oneDecadeMs = parseRelativeTime('10 years')!;
+  const twoDecadesMs = parseRelativeTime('20 years');
+
+  expect(parseRelativeTime('1 decade')).toBe(oneDecadeMs);
+  expect(parseRelativeTime('2 decades')).toBe(twoDecadesMs);
+  expect(parseRelativeTime('1 decade ago')).toBe(-oneDecadeMs);
+  expect(parseRelativeTime('in 1 decade')).toBe(oneDecadeMs);
+})
+
 it('should not parse misleading values', () => {
   expect(parseRelativeTime('2 million')).toBeNull();
   expect(

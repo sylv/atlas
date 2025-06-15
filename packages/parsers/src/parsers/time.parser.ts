@@ -14,6 +14,7 @@ export interface TimeParseResult {
 }
 
 const TIMESTAMP_REGEX = /\b[0-9]{8,16}\b/u;
+const DECADE_REGEX = /(\d+(?:\.\d+)?)\s*decades?\b/giu;
 const STRIP_AROUND = new Set(['to', 'in', 'until', 'ago', 'at', 'next', 'for']);
 const ALIAS_REGEX = /(?<= |^)(\d{1,2}) ?(s|m|h|d|w|mo)(?= |\d+|$)/giu;
 const ALIASES = new Map<string, string>([
@@ -33,6 +34,7 @@ const MUST_INCLUDE_WORDS = [
   'week',
   'month',
   'year',
+  'decade',
   'jan',
   'feb',
   'mar',
@@ -119,6 +121,12 @@ export const parseTime = (input: string, ref = new Date()): TimeParseResult | un
       Math.max(0, matchEndIndex),
     )}`;
   }
+
+  // "1 decade" -> "10 years"
+  clean = clean.replace(DECADE_REGEX, (match, value) => {
+    const years = parseFloat(value) * 10;
+    return `${years} years`;
+  });
 
   clean = clean.trim();
   const matches = parse(clean, ref, { forwardDate: true });
