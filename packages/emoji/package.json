@@ -23,7 +23,7 @@
   "scripts": {
     "build": "tsc --noEmit && tsup",
     "test": "vitest run",
-    "prepublishOnly": "pnpm run test && pnpm run build"
+    "prepublishOnly": "bun run test && bun run build"
   },
   "dependencies": {
     "@atlasbot/core": "workspace:*"

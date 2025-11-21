@@ -1,4 +1,4 @@
 {
   "editor.formatOnSave": true,
-  "npm.packageManager": "pnpm"
+  "npm.packageManager": "bun"
 }
