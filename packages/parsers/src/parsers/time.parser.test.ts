@@ -45,6 +45,12 @@ it('should parse absolute dates', () => {
   expect(parseAbsoluteDate('2021-06-08T04:59:24.491Z')).toStrictEqual(new Date('2021-06-08T04:59:24.491Z'));
 });
 
+it('should parse absolute dates with trailing IANA timezones', () => {
+  const ref = new Date('2026-01-10T12:00:00Z');
+  const result = parseAbsoluteDate('July 1 2026 09:00 Europe/Berlin', ref);
+  expect(result?.toISOString()).toBe('2026-07-01T07:00:00.000Z');
+});
+
 it('should parse unix timestamps in seconds and milliseconds', () => {
   // milliseconds
   expect(parseAbsoluteDate('1623125364465')).toStrictEqual(new Date(1623125364465));

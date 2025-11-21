@@ -64,3 +64,15 @@ it('should not punish cron schedules that might be under 1m in the future but re
   expect(result!.getMinutes()).toEqual(testRef.getMinutes() + 1);
   expect(result!.getSeconds()).toEqual(0);
 });
+
+it('should parse IANA timezone identifiers for text schedules', () => {
+  const ref = new Date('2025-12-15T05:00:00Z');
+  const result = parseSchedule('every day at 9:00 Europe/Berlin', ref);
+  expect(result?.toISOString()).toBe('2025-12-15T08:00:00.000Z');
+});
+
+it('should respect daylight savings changes for IANA timezones', () => {
+  const ref = new Date('2026-01-10T12:00:00Z');
+  const result = parseSchedule('July 1 2026 09:00 Europe/Berlin', ref);
+  expect(result?.toISOString()).toBe('2026-07-01T07:00:00.000Z');
+});

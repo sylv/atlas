@@ -1,4 +1,4 @@
-import { parse } from 'chrono-node';
+import { parse, type ParsedComponents } from 'chrono-node';
 
 export interface TimeParseResult {
   /** The relative time from the reference date to the given time. */
@@ -69,6 +69,90 @@ const MUST_INCLUDE_WORDS = [
 ];
 
 const MUST_INCLUDE_PATTERN = new RegExp(`[0-9]|(${MUST_INCLUDE_WORDS.join('|')})`, 'iu');
+const TRAILING_IANA_TIMEZONE = /(?:^|\s)([A-Za-z]+\/[A-Za-z0-9_+\-]+(?:\/[A-Za-z0-9_+\-]+)*)$/u;
+
+interface IanaTimezoneContext {
+  timezone: string;
+  offsetAtReference: number;
+}
+
+const getIanaTimezoneOffsetMinutes = (timeZone: string, at: Date): number | null => {
+  try {
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      hour12: false,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+
+    const parts = formatter.formatToParts(at);
+    const partMap: Record<string, string> = {};
+    for (const part of parts) {
+      if (part.type === 'literal') continue;
+      partMap[part.type] = part.value;
+    }
+
+    const utcTime = Date.UTC(
+      Number.parseInt(partMap.year, 10),
+      Number.parseInt(partMap.month, 10) - 1,
+      Number.parseInt(partMap.day, 10),
+      Number.parseInt(partMap.hour, 10),
+      Number.parseInt(partMap.minute, 10),
+      Number.parseInt(partMap.second, 10),
+    );
+
+    return Math.round((utcTime - at.getTime()) / 60000);
+  } catch {
+    return null;
+  }
+};
+
+const stripTrailingIanaTimezone = (input: string): { clean: string; timezone: string } | null => {
+  const match = TRAILING_IANA_TIMEZONE.exec(input);
+  if (!match) return null;
+  const clean = input.slice(0, Math.max(0, match.index)).trim();
+  return { clean, timezone: match[1] };
+};
+
+const buildDateWithIanaTimezone = (
+  components: ParsedComponents,
+  context: IanaTimezoneContext,
+): Date | null => {
+  const year = components.get('year');
+  const month = components.get('month');
+  const day = components.get('day');
+  if (year == null || month == null || day == null) return null;
+
+  const hour = components.get('hour') ?? 0;
+  const minute = components.get('minute') ?? 0;
+  const second = components.get('second') ?? 0;
+  const millisecond = components.get('millisecond') ?? 0;
+
+  let offset = context.offsetAtReference;
+  const buildDate = (offsetMinutes: number): Date =>
+    new Date(Date.UTC(year, month - 1, day, hour, minute, second, millisecond) - offsetMinutes * 60000);
+
+  let candidate = buildDate(offset);
+  for (let i = 0; i < 5; i++) {
+    const computedOffset = getIanaTimezoneOffsetMinutes(context.timezone, candidate);
+    if (computedOffset == null || computedOffset === offset) {
+      if (computedOffset != null) {
+        offset = computedOffset;
+        candidate = buildDate(offset);
+      }
+      break;
+    }
+
+    offset = computedOffset;
+    candidate = buildDate(offset);
+  }
+
+  return candidate;
+};
 
 /**
  * Returns true if the date is essentially invalid
@@ -129,12 +213,34 @@ export const parseTime = (input: string, ref = new Date()): TimeParseResult | un
   });
 
   clean = clean.trim();
-  const matches = parse(clean, ref, { forwardDate: true });
+  let timezoneContext: IanaTimezoneContext | undefined;
+  const timezoneMatch = stripTrailingIanaTimezone(clean);
+  if (timezoneMatch) {
+    const offsetAtReference = getIanaTimezoneOffsetMinutes(timezoneMatch.timezone, ref);
+    if (offsetAtReference != null) {
+      clean = timezoneMatch.clean;
+      timezoneContext = {
+        timezone: timezoneMatch.timezone,
+        offsetAtReference,
+      };
+    }
+  }
+
+  const reference = timezoneContext ? { instant: ref, timezone: timezoneContext.offsetAtReference } : ref;
+  const matches = parse(clean, reference, { forwardDate: true });
   const match = matches.find((match) => MUST_INCLUDE_PATTERN.test(match.text));
   if (!match) return;
+
+  let absoluteDate = match.date();
+  if (timezoneContext) {
+    const rebuilt = buildDateWithIanaTimezone(match.start, timezoneContext);
+    if (rebuilt) {
+      absoluteDate = rebuilt;
+    }
+  }
   return {
-    absolute: match.date(),
-    relative: match.date().getTime() - ref.getTime(),
+    absolute: absoluteDate,
+    relative: absoluteDate.getTime() - ref.getTime(),
     index: match.index,
     input: clean,
     match: match.text,
