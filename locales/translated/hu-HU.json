@@ -82,7 +82,7 @@
   "RESOLVES": "Megoldja",
   "MAIN_BOT_MISSING_EMBED_TITLE": "A Fő Bot Hiányzik",
   "MAIN_BOT_MISSING_EMBED_DESCRIPTION": "Sajnáljuk, de az Atlasnak a szerveren kell maradnia, hogy az egyéni botok működhessenek. Kérjük, helyezze vissza, vagy vegye fel a kapcsolatot egy moderátorral, hogy megtegye.",
-  "COMMAND_BAN_PURGED": "Tömöges kitiltva {{mention}}",
+  "COMMAND_BAN_PURGED": "Tömeges kitiltva {{mention}}",
   "COMMAND_BAN_DURATION": " időtartamra {{duration}}",
   "COMMAND_BAN_REASON": " indokkal `{{reason}}`",
   "COMMAND_BAN_TOO_SHORT": "Nem tudsz kitiltani tagokat kevesebb mint 30 másodperc.",
