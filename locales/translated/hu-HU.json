@@ -221,7 +221,7 @@
   "INVITE_DELETED": "Meghívó Törölve",
   "INVITE_DELETED_DESCRIPTION": "Egy meghívó törlésre került.",
   "MESSAGE_UPDATED": "Üzenet Szerkesztve",
-  "MESSAGE_UPDATED_DESCRIPTION": "Az üzenet szerkesztve lett.",
+  "MESSAGE_UPDATED_DESCRIPTION": "Az üzenet frissítve lett.",
   "MESSAGE_DELETED": "Üzenet Törölve",
   "MESSAGE_DELETED_DESCRIPTION": "Egy üzenet törölve lett.",
   "MESSAGE_DELETED_BULK": "Üzenetek Tömegesen Törölve",
