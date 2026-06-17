@@ -6,7 +6,7 @@ const ZERO_WIDTH_JOINER = String.fromCodePoint(0x200d);
 // without stripping these, emojis that are the same wont match eachother.
 // THe VS16 character(s) are just changing how the emoji is displayed and
 // get in the way for things like comparison or lookup.
-// https://github.com/twitter/twemoji-parser/blob/a97ef3994e4b88316812926844d51c296e889f76/src/index.js#L56
+// https://github.com/jdecked/twemoji-parser/blob/a97ef3994e4b88316812926844d51c296e889f76/src/index.js#L56
 export function removeVS16s(emoji: string): string {
   if (!emoji.includes(ZERO_WIDTH_JOINER)) return emoji.replaceAll(VS16_REGEX, '');
   return emoji;

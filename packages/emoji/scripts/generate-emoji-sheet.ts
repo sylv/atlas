@@ -1,54 +1,50 @@
 import { execSync } from 'child_process';
 import { existsSync, mkdirSync, statSync } from 'fs';
-import { writeFile } from 'fs/promises';
-import { tmpdir } from 'os';
-import pLimit from 'p-limit';
-import pRetry from 'p-retry';
 import { join, resolve } from 'path';
-import pngquant from 'pngquant-bin';
 import sharp from 'sharp';
-import { request } from 'undici';
 import { type Emoji } from '../src/classes/emoji.js';
 import { SHEET_EMOJIS_PER_ROW, SHEET_EMOJI_SIZE } from '../src/constants.js';
 import { emojis } from '../src/emojis.js';
 import { getSheetPosition } from '../src/functions/get-sheet-position.js';
+import { toCodePointsWithoutVS16s } from '../src/functions/helpers.js';
+import { tmpdir } from 'os';
 
-const cacheDir = join(tmpdir(), 'emojis');
-mkdirSync(cacheDir, { recursive: true });
+const TWEMOJI_REPO = 'https://github.com/jdecked/twemoji.git';
+const cloneDir = join(tmpdir(), 'twemoji');
 
-function getEmojiPath(emoji: Emoji) {
-  return join(cacheDir, `${emoji.codePoints.join('-')}.svg`);
-}
-
-const downloadEmoji = async (emoji: Emoji) => {
-  const url = emoji.getUrl('svg');
-  const path = getEmojiPath(emoji);
-  const exists = existsSync(path);
-  if (exists) return;
-  console.debug(`Downloading "${url}" to "${path}"`);
-  const response = await request(url);
-  if (response.statusCode !== 200) {
-    throw new Error(`${url} returned ${response.statusCode}`);
-  }
-
-  const body = await response.body.arrayBuffer();
-  await writeFile(path, Buffer.from(body));
+const RAW_EMOJI_OPTIONS = {
+  width: SHEET_EMOJI_SIZE,
+  height: SHEET_EMOJI_SIZE,
+  channels: 4 as const,
 };
 
-const limit = pLimit(50);
-async function downloadEmojis() {
-  const promises = [];
-  for (const emoji of emojis) {
-    const promise = limit(() => pRetry(() => downloadEmoji(emoji), { retries: 5 }));
-    promises.push(promise);
+const RAW_ROW_OPTIONS = {
+  width: SHEET_EMOJIS_PER_ROW * SHEET_EMOJI_SIZE,
+  height: SHEET_EMOJI_SIZE,
+  channels: 4 as const,
+};
+
+function getEmojiPath(emoji: Emoji) {
+  return join(cloneDir, 'assets', 'svg', `${toCodePointsWithoutVS16s(emoji.id).join('-')}.svg`);
+}
+
+function cloneTwemoji() {
+  if (existsSync(join(cloneDir, 'assets', 'svg'))) {
+    console.log('twemoji already cloned, skipping');
+    return;
   }
 
-  await Promise.all(promises);
+  console.log('Cloning jdecked/twemoji (shallow)...');
+  mkdirSync(cloneDir, { recursive: true });
+  execSync(`git clone --depth 1 --filter=blob:none --sparse ${TWEMOJI_REPO} ${cloneDir}`, {
+    stdio: 'inherit',
+  });
+  execSync('git sparse-checkout set assets/svg', { cwd: cloneDir, stdio: 'inherit' });
+  console.log('Cloned twemoji');
 }
 
 async function main() {
-  await downloadEmojis();
-  console.log('Downloaded emojis');
+  cloneTwemoji();
 
   // todo: calculate emoji positions using getSheetPosition() and setSheetPosition()
   // so we can be sure they're always gonna be accurate
@@ -59,10 +55,16 @@ async function main() {
     const position = getSheetPosition(emoji);
     const emojiPath = getEmojiPath(emoji);
     const rowOverlay = rowOverlays[position.sheetRow];
+
     const emojiOverlay: sharp.OverlayOptions = {
       top: 0,
       left: position.left,
-      input: await sharp(emojiPath).resize(SHEET_EMOJI_SIZE, SHEET_EMOJI_SIZE).webp().toBuffer(),
+      input: await sharp(emojiPath)
+        .resize(SHEET_EMOJI_SIZE, SHEET_EMOJI_SIZE)
+        .ensureAlpha()
+        .raw()
+        .toBuffer(),
+      raw: RAW_EMOJI_OPTIONS,
     };
 
     if (rowOverlay) rowOverlay.push(emojiOverlay);
@@ -81,13 +83,14 @@ async function main() {
         },
       })
         .composite(composite)
-        .webp()
+        .raw()
         .toBuffer(),
     ),
   );
 
   console.log('Generating sheet');
-  const sheetPath = '/tmp/emoji-sheet.png';
+  // const sheetPath = resolve(`data/sheet-${SHEET_EMOJI_SIZE}x${SHEET_EMOJI_SIZE}.png`);
+  const sheetPath = resolve(`data/sheet-${SHEET_EMOJI_SIZE}x${SHEET_EMOJI_SIZE}.png`);
   await sharp({
     create: {
       background: { r: 0, g: 0, b: 0, alpha: 0 },
@@ -99,31 +102,24 @@ async function main() {
     .composite(
       rows.map((row, rowIndex) => ({
         input: row,
+        raw: RAW_ROW_OPTIONS,
         top: rowIndex * SHEET_EMOJI_SIZE,
         left: 0,
       })),
     )
     .png({
-      progressive: true,
-      quality: 80,
-      compressionLevel: 9,
-      palette: true,
+      effort: 10, // this is the only flag that seems to matter with oxipng
+      // palette, quality, compressionLevel, progressive and adaptiveFiltering were
+      // all tried, but had no effect on the output size with oxipng, so we just omit them.
     })
     .toFile(sheetPath);
 
+  // with the best settings above, this saves 25-75kb. with the worst it can save up to 2.5mb
+  execSync(`npx oxipng -o max --strip all --alpha ${sheetPath}`, { stdio: 'inherit' });
+
   const size = statSync(sheetPath).size;
   const kb = (size / 1024).toFixed(2);
-  console.log(`Generated emoji sheet (${kb}kb)`);
-  console.log('Compressing image');
-
-  const compressedPath = resolve(`data/sheet-${SHEET_EMOJI_SIZE}x${SHEET_EMOJI_SIZE}.png`);
-  execSync(`${pngquant} ${sheetPath} --output ${compressedPath} --force --strip --speed 1`, {
-    stdio: 'inherit',
-  });
-
-  const compressedSize = statSync(compressedPath).size;
-  const compressedKb = (compressedSize / 1024).toFixed(2);
-  console.log(`Compressed emoji sheet (${compressedKb}kb)`);
+  console.log(`Generated emoji sheet ${sheetPath} (${kb}kb)`);
 }
 
 main().catch(console.error);

@@ -1,4 +1,4 @@
-export const TWITTER_EMOJI_ROOT = 'https://cdn.jsdelivr.net/gh/twitter/twemoji/assets';
+export const TWITTER_EMOJI_ROOT = 'https://cdn.jsdelivr.net/gh/jdecked/twemoji/assets';
 
 export const SHEET_EMOJIS_PER_ROW = 32;
 export const SHEET_EMOJI_SIZE = 24;

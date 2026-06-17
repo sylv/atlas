@@ -18,10 +18,10 @@ it('should calculate codepoints properly', () => {
 it('should calculate urls properly', () => {
   // make sure we're not unnecessarily stripping the vs16 character here
   // because apparently its used in some places but not others. thanks twemoji!
-  expect(transFlag.url).toBe('https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/72x72/1f3f3-fe0f-200d-26a7-fe0f.png');
+  expect(transFlag.url).toBe('https://cdn.jsdelivr.net/gh/jdecked/twemoji/assets/72x72/1f3f3-fe0f-200d-26a7-fe0f.png');
   // make sure we're stripping the vs16 character when computing the url
-  expect(VS16Emoji.url).toBe('https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/72x72/263a.png');
-  expect(auFlag.url).toBe('https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/72x72/1f1e6-1f1fa.png');
+  expect(VS16Emoji.url).toBe('https://cdn.jsdelivr.net/gh/jdecked/twemoji/assets/72x72/263a.png');
+  expect(auFlag.url).toBe('https://cdn.jsdelivr.net/gh/jdecked/twemoji/assets/72x72/1f1e6-1f1fa.png');
   expect(guildEmoji.url).toBe('https://cdn.discordapp.com/emojis/538224338269372438.gif');
 });
 
