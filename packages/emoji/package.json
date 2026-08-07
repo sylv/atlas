@@ -30,14 +30,10 @@
   },
   "devDependencies": {
     "@atlasbot/configs": "workspace:*",
-    "@types/node": "^20.19.43",
-    "@types/pngquant-bin": "^4.0.2",
-    "p-limit": "^5.0.0",
-    "p-retry": "^6.2.1",
-    "sharp": "^0.33.5",
+    "@types/node": "^26.1.2",
+    "sharp": "^0.35.3",
     "tsup": "^8.5.1",
-    "typescript": "^5.9.3",
-    "undici": "^6.26.0",
-    "vitest": "^1.6.1"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
   }
 }

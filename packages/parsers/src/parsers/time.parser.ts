@@ -259,7 +259,12 @@ export const parseAbsoluteDate = (input: string, ref = new Date()): Date | null 
  * Parse a human time string to milliseconds.
  */
 export const parseRelativeTime = (input: string): number | null => {
-  const date = parseTime(input);
+  const ref = new Date();
+  const date = parseTime(input, ref);
+  if (date && /\d+(?:\.\d+)?\s*decades?\b/iu.test(input) && /\bago\b/iu.test(input)) {
+    const forwardDate = parseTime(input.replace(/\s+ago\b/iu, ''), ref);
+    return forwardDate ? -forwardDate.relative : date.relative;
+  }
   return date ? date.relative : null;
 };
 

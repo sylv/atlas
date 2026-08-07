@@ -5,6 +5,6 @@
     "outDir": "dist",
     "noUncheckedIndexedAccess": false,
     "lib": ["es2021", "dom"],
-    "baseUrl": "."
+    "types": ["node"]
   }
 }

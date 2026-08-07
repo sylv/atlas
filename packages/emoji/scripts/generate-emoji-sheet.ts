@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 import { existsSync, mkdirSync, statSync } from 'fs';
 import { join, resolve } from 'path';
-import sharp from 'sharp';
+import sharp, { type OverlayOptions } from 'sharp';
 import { type Emoji } from '../src/classes/emoji.js';
 import { SHEET_EMOJIS_PER_ROW, SHEET_EMOJI_SIZE } from '../src/constants.js';
 import { emojis } from '../src/emojis.js';
@@ -49,14 +49,14 @@ async function main() {
   // todo: calculate emoji positions using getSheetPosition() and setSheetPosition()
   // so we can be sure they're always gonna be accurate
   console.log('Generating rows');
-  const rowOverlays: sharp.OverlayOptions[][] = [];
+  const rowOverlays: OverlayOptions[][] = [];
   for (const emoji of emojis) {
     if (emoji.index === null) continue;
     const position = getSheetPosition(emoji);
     const emojiPath = getEmojiPath(emoji);
     const rowOverlay = rowOverlays[position.sheetRow];
 
-    const emojiOverlay: sharp.OverlayOptions = {
+    const emojiOverlay: OverlayOptions = {
       top: 0,
       left: position.left,
       input: await sharp(emojiPath)

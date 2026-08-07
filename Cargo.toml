@@ -1,8 +1,0 @@
-[workspace]
-members = ["packages/razorback", "packages/razorback_derive"]
-
-[profile.release]
-codegen-units = 1
-lto = true
-panic = 'abort'
-opt-level = "s"

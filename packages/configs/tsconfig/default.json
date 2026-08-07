@@ -21,6 +21,7 @@
     "forceConsistentCasingInFileNames": false,
     "noEmitOnError": true,
     "stripInternal": true,
+    "ignoreDeprecations": "6.0",
 
     // modules
 		"module": "ESNext",
