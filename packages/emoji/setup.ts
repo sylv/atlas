@@ -1,5 +1,5 @@
-import { expect } from 'vitest';
-import { Emoji } from './src/index.js';
+import { expect } from "vitest";
+import { Emoji } from "./src/index.js";
 
 expect.addSnapshotSerializer({
   test: (value) => value instanceof Emoji,

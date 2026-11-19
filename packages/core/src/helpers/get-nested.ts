@@ -1,6 +1,6 @@
-import { NUMBER_REGEX } from '../constants.js';
-import { isPlainObject } from './is-object.js';
-import { isPrimitive } from './is-primitive.js';
+import { NUMBER_REGEX } from "../constants.js";
+import { isPlainObject } from "./is-object.js";
+import { isPrimitive } from "./is-primitive.js";
 
 export enum PathType {
   KEY,
@@ -25,7 +25,7 @@ export interface PathPartIndex {
 }
 
 export type PathPart = PathPartKey | PathPartFind | PathPartIndex;
-export const RESTRICTED_KEYS = new Set<string>(['__proto__', 'prototype', 'constructor']);
+export const RESTRICTED_KEYS = new Set<string>(["__proto__", "prototype", "constructor"]);
 export const INDEX_REGEX = /^\d{1,5}$/u;
 export const FIND_REGEX = /(\[[^\]]+\])/gu;
 
@@ -35,21 +35,21 @@ export function* parsePath(path: string): Generator<PathPart> {
   // which is obviously not what anyone wants. so we split [] then dots
   const splitFinds = path.split(FIND_REGEX);
   const split = splitFinds.flatMap((part, index) => {
-    if (part.startsWith('[') && part.endsWith(']')) return part;
-    if (part.endsWith('.') && splitFinds[index + 1] && splitFinds[index + 1].startsWith('[')) {
+    if (part.startsWith("[") && part.endsWith("]")) return part;
+    if (part.endsWith(".") && splitFinds[index + 1] && splitFinds[index + 1].startsWith("[")) {
       // old syntax was items.[name:channel.id] because of parsing limitations,
       // new syntax is items[name:channel.id] so we strip the unnecessary .
       part = part.slice(0, -1);
     }
 
-    return part.split('.');
+    return part.split(".");
   });
 
   for (const part of split) {
     if (!part) continue;
-    const isArrayFind = part.startsWith('[') && part.endsWith(']');
+    const isArrayFind = part.startsWith("[") && part.endsWith("]");
     if (isArrayFind) {
-      const [key, value] = part.slice(1, -1).split(':');
+      const [key, value] = part.slice(1, -1).split(":");
       if (NUMBER_REGEX.test(key) && !value) {
         yield { type: PathType.INDEX, index: Number(key) };
         continue;
@@ -82,7 +82,7 @@ export function throwIfRestricted(key: string) {
 
 export function isNullish(object: unknown): boolean {
   if (object === undefined) return true;
-  if (object === null || object === '') return true;
+  if (object === null || object === "") return true;
   return false;
 }
 

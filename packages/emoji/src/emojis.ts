@@ -1,10 +1,10 @@
-import { EmojiCategory } from './classes/emoji-category.js';
-import { Emoji } from './classes/emoji.js';
-import { SKIN_TONE_NAME_IDENTIFIER, SKIN_TONE_UNICODE_REGEX } from './constants.js';
-import emojiData from './emojis.json';
-import { getAllMatches } from './functions/get-all-matches.helper.js';
-import { HAS_SKIN_TONE_SUPPORT } from './functions/has-skin-tone-support.js';
-import { removeVS16s } from './functions/helpers.js';
+import { EmojiCategory } from "./classes/emoji-category.js";
+import { Emoji } from "./classes/emoji.js";
+import { SKIN_TONE_NAME_IDENTIFIER, SKIN_TONE_UNICODE_REGEX } from "./constants.js";
+import emojiData from "./emojis.json";
+import { getAllMatches } from "./functions/get-all-matches.helper.js";
+import { HAS_SKIN_TONE_SUPPORT } from "./functions/has-skin-tone-support.js";
+import { removeVS16s } from "./functions/helpers.js";
 
 const emojiMap = new Map<string, Emoji>();
 const emojis: Emoji[] = [];
@@ -14,7 +14,7 @@ let previousEmoji: Emoji | undefined;
 for (const [categoryName, categoryValue] of Object.entries(emojiData)) {
   // typescript adds a "default" property with a clone of the original object
   // for "helpful" compatibility, which breaks everything and causes infinite loops.
-  if (categoryName === 'default') continue;
+  if (categoryName === "default") continue;
 
   const category = new EmojiCategory(categoryName, categoryIndex);
   categoryIndex++;
@@ -37,8 +37,8 @@ for (const [categoryName, categoryValue] of Object.entries(emojiData)) {
 
       // we check by ID and name because for some emojis, the base name is different to the skin tone variants
       // so checking both is more reliable
-      const nameWithoutSkinTone = emojiName.replace(SKIN_TONE_NAME_IDENTIFIER, '');
-      const idWithoutSkinTone = emojiId.replace(SKIN_TONE_UNICODE_REGEX, '');
+      const nameWithoutSkinTone = emojiName.replace(SKIN_TONE_NAME_IDENTIFIER, "");
+      const idWithoutSkinTone = emojiId.replace(SKIN_TONE_UNICODE_REGEX, "");
       if (previousEmoji?.name === nameWithoutSkinTone) withoutSkinTone = previousEmoji;
       else if (previousEmoji?.id === idWithoutSkinTone) withoutSkinTone = previousEmoji;
       else if (previousEmoji?.withoutSkinTone?.name === nameWithoutSkinTone) {

@@ -9,7 +9,7 @@ export const DISCORD_SNOWFLAKE_REGEX = /\b(?<id>\d{17,19})\b/u;
  * @group id
  * @see {@link DISCORD_SNOWFLAKE_REGEX}
  */
-export const DISCORD_SNOWFLAKE_REGEX_STRICT = new RegExp(`^${DISCORD_SNOWFLAKE_REGEX.source}$`, 'u');
+export const DISCORD_SNOWFLAKE_REGEX_STRICT = new RegExp(`^${DISCORD_SNOWFLAKE_REGEX.source}$`, "u");
 
 /**
  * Matches Discord snowflakes with an optional prefix.
@@ -23,5 +23,5 @@ export const DISCORD_SNOWFLAKE_REGEX_STRICT = new RegExp(`^${DISCORD_SNOWFLAKE_R
  */
 export const DISCORD_PREFIXED_SNOWFLAKE_REGEX = new RegExp(
   `(?<prefix>[@|!|#|&|:])?${DISCORD_SNOWFLAKE_REGEX.source}`,
-  'u',
+  "u",
 );

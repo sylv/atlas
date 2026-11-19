@@ -1,50 +1,50 @@
 /* eslint-disable import/no-named-default */
-import { NUMBER_REGEX } from '@atlasbot/core';
+import { NUMBER_REGEX } from "@atlasbot/core";
 
 const UNITS = new Map([
-  ['hundred', 100],
-  ['thousand', 1000],
-  ['k', 1000],
-  ['milion', 1e6],
-  ['m', 1e6],
-  ['billion', 1e9],
-  ['b', 1e9],
+  ["hundred", 100],
+  ["thousand", 1000],
+  ["k", 1000],
+  ["milion", 1e6],
+  ["m", 1e6],
+  ["billion", 1e9],
+  ["b", 1e9],
 ]);
 
 const NUMBERS = new Map([
-  ['one', 1],
-  ['two', 2],
-  ['three', 3],
-  ['four', 4],
-  ['five', 5],
-  ['six', 6],
-  ['seven', 7],
-  ['eight', 8],
-  ['nine', 9],
-  ['ten', 10],
-  ['eleven', 11],
-  ['twelve', 12],
-  ['thirteen', 13],
-  ['fourteen', 14],
-  ['fifteen', 15],
-  ['sixteen', 16],
-  ['seventeen', 17],
-  ['eighteen', 18],
-  ['nineteen', 19],
-  ['twenty', 20],
-  ['thirty', 30],
-  ['forty', 40],
-  ['fifty', 50],
-  ['sixty', 60],
-  ['seventy', 70],
-  ['eighty', 80],
-  ['ninety', 90],
+  ["one", 1],
+  ["two", 2],
+  ["three", 3],
+  ["four", 4],
+  ["five", 5],
+  ["six", 6],
+  ["seven", 7],
+  ["eight", 8],
+  ["nine", 9],
+  ["ten", 10],
+  ["eleven", 11],
+  ["twelve", 12],
+  ["thirteen", 13],
+  ["fourteen", 14],
+  ["fifteen", 15],
+  ["sixteen", 16],
+  ["seventeen", 17],
+  ["eighteen", 18],
+  ["nineteen", 19],
+  ["twenty", 20],
+  ["thirty", 30],
+  ["forty", 40],
+  ["fifty", 50],
+  ["sixty", 60],
+  ["seventy", 70],
+  ["eighty", 80],
+  ["ninety", 90],
 ]);
 
 // this is basically random
 const MAX_SAFE_NUMBER = 100_000_000_000;
 const SHORT_UNITS = [...UNITS.keys()].filter((u) => u.length <= 2);
-const UNIT_WITH_NUMBER_REGEX = new RegExp(`\\b(?<number>[0-9\\.\\,]+)(?<unit>${SHORT_UNITS.join('|')})\\b`);
+const UNIT_WITH_NUMBER_REGEX = new RegExp(`\\b(?<number>[0-9\\.\\,]+)(?<unit>${SHORT_UNITS.join("|")})\\b`);
 const SPLIT_REGEX = /[ -]+/;
 
 // https://regex101.com/r/b0cHwN/1
@@ -59,7 +59,7 @@ export const parseNumber = (input: string, onlyNumber?: boolean): number | null 
   input = input.trim();
   if (LAX_NUMBER_REGEX.test(input)) {
     // regex is fast
-    const result = Number(input.replaceAll(LAX_NUMBER_REPLACE_REGEX, ''));
+    const result = Number(input.replaceAll(LAX_NUMBER_REPLACE_REGEX, ""));
     if (result > MAX_SAFE_NUMBER) return null;
     return result;
   }
@@ -75,7 +75,7 @@ export const parseNumber = (input: string, onlyNumber?: boolean): number | null 
 
     const isNumber = NUMBER_REGEX.test(part);
     if (isNumber) {
-      const num = Number(part.replaceAll(LAX_NUMBER_REPLACE_REGEX, ''));
+      const num = Number(part.replaceAll(LAX_NUMBER_REPLACE_REGEX, ""));
       result = result === null ? num : result + num;
       continue;
     }

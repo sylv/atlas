@@ -1,9 +1,9 @@
-import { NUMBER_REGEX } from '@atlasbot/core';
-import rgbToHex from 'rgb-hex';
-import { HEX_REGEX, MAX_HEX_COLOUR, MIN_HEX_COLOUR, RGB_REGEX } from '../constants.js';
-import { getClosestColour } from './get-closest-known-colour.js';
-import { getKnownColour } from './get-known-colour.js';
-import { type Colour } from './known-colours.js';
+import { NUMBER_REGEX } from "@atlasbot/core";
+import rgbToHex from "rgb-hex";
+import { HEX_REGEX, MAX_HEX_COLOUR, MIN_HEX_COLOUR, RGB_REGEX } from "../constants.js";
+import { getClosestColour } from "./get-closest-known-colour.js";
+import { getKnownColour } from "./get-known-colour.js";
+import { type Colour } from "./known-colours.js";
 
 export interface ColourParseResult {
   /**
@@ -29,8 +29,8 @@ export interface ColourParseResult {
  * Takes hex, decimal, rgb, or a known name.
  */
 export function parseColour(colour: string | number): ColourParseResult | undefined {
-  if (typeof colour === 'number' || NUMBER_REGEX.test(colour)) {
-    const value = typeof colour === 'string' ? Number(colour) : colour;
+  if (typeof colour === "number" || NUMBER_REGEX.test(colour)) {
+    const value = typeof colour === "string" ? Number(colour) : colour;
     if (MAX_HEX_COLOUR < value || MIN_HEX_COLOUR > value) return;
     const closest = getClosestColour(value);
     const match = closest.decimal === value ? closest : undefined;

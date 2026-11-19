@@ -8,7 +8,7 @@ const ZERO_WIDTH_JOINER = String.fromCodePoint(0x200d);
 // get in the way for things like comparison or lookup.
 // https://github.com/jdecked/twemoji-parser/blob/a97ef3994e4b88316812926844d51c296e889f76/src/index.js#L56
 export function removeVS16s(emoji: string): string {
-  if (!emoji.includes(ZERO_WIDTH_JOINER)) return emoji.replaceAll(VS16_REGEX, '');
+  if (!emoji.includes(ZERO_WIDTH_JOINER)) return emoji.replaceAll(VS16_REGEX, "");
   return emoji;
 }
 

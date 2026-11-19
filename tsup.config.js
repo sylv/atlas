@@ -1,15 +1,15 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup";
 
 /**
  * @param {import('tsup').Options} options
  */
 export function createTsupConfig({
-  entry = ['src/index.ts'],
+  entry = ["src/index.ts"],
   external = [],
   noExternal = [],
-  platform = 'node',
-  format = ['esm'],
-  target = 'es2022',
+  platform = "node",
+  format = ["esm"],
+  target = "es2022",
   clean = true,
   shims = true,
   minify = false,

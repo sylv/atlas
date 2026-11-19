@@ -1,19 +1,19 @@
 {
   "name": "@atlasbot/parsers",
   "version": "10.5.23",
-  "type": "module",
-  "types": "./dist/index.d.ts",
-  "exports": "./dist/index.js",
   "license": "AGPL-3.0",
-  "publishConfig": {
-    "access": "public"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sylv/atlas.git"
   },
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sylv/atlas.git"
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsc --noEmit && tsup && tsc -p tsconfig.build.json",

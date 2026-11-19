@@ -1,6 +1,6 @@
 export const getAllMatches = (regex: RegExp, text: string): Set<string> => {
-  if (!regex.flags.includes('g')) {
-    throw new Error('getAllMatches requires a global regex');
+  if (!regex.flags.includes("g")) {
+    throw new Error("getAllMatches requires a global regex");
   }
 
   const matches = new Set<string>();

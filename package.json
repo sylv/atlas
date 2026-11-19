@@ -3,11 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "license": "AGPL-3.0",
-  "packageManager": "pnpm@12.15.0",
-  "engines": {
-    "node": ">=22",
-    "pnpm": ">=12.15.0"
-  },
   "scripts": {
     "clean": "rm -rf ./packages/*/dist",
     "build": "pnpm run --recursive build",
@@ -20,5 +15,10 @@
     "oxlint": "^1.94.0",
     "tsup": "^9.0.0",
     "typescript": "7.0.2"
-  }
+  },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=12.15.0"
+  },
+  "packageManager": "pnpm@12.15.0"
 }

@@ -1,10 +1,10 @@
 const TRIM_REGEX = /^('|"|“|”)|('|"|“|”)$/gu;
 function trim(input: string) {
-  return input.trim().replaceAll(TRIM_REGEX, '').trim();
+  return input.trim().replaceAll(TRIM_REGEX, "").trim();
 }
 
 // ordered by priority
-const SPLIT_CHARS = ['|', ' OR ', ','];
+const SPLIT_CHARS = ["|", " OR ", ","];
 
 export function parseList(input: string) {
   for (const splitChar of SPLIT_CHARS) {

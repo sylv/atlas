@@ -1,4 +1,4 @@
-import { parse, type ParsedComponents } from 'chrono-node';
+import { parse, type ParsedComponents } from "chrono-node";
 
 export interface TimeParseResult {
   /** The relative time from the reference date to the given time. */
@@ -15,60 +15,60 @@ export interface TimeParseResult {
 
 const TIMESTAMP_REGEX = /\b[0-9]{8,16}\b/u;
 const DECADE_REGEX = /(\d+(?:\.\d+)?)\s*decades?\b/giu;
-const STRIP_AROUND = new Set(['to', 'in', 'until', 'ago', 'at', 'next', 'for']);
+const STRIP_AROUND = new Set(["to", "in", "until", "ago", "at", "next", "for"]);
 const ALIAS_REGEX = /(?<= |^)(\d{1,2}) ?(s|m|h|d|w|mo)(?= |\d+|$)/giu;
 const ALIASES = new Map<string, string>([
-  ['s', 'second'],
-  ['m', 'minute'],
-  ['h', 'hour'],
-  ['d', 'day'],
-  ['w', 'week'],
-  ['mo', 'month'],
+  ["s", "second"],
+  ["m", "minute"],
+  ["h", "hour"],
+  ["d", "day"],
+  ["w", "week"],
+  ["mo", "month"],
 ]);
 
 const MUST_INCLUDE_WORDS = [
-  'sec',
-  'min',
-  'hour',
-  'day',
-  'week',
-  'month',
-  'year',
-  'decade',
-  'jan',
-  'feb',
-  'mar',
-  'apr',
-  'may',
-  'jun',
-  'jul',
-  'aug',
-  'sep',
-  'oct',
-  'nov',
-  'dec',
-  'pm',
-  'am',
-  'mon',
-  'tue',
-  'wed',
-  'thu',
-  'fri',
-  'sat',
-  'sun',
-  'tomorrow',
-  'yesterday',
-  'today',
-  'now',
-  'ago',
-  'next',
-  'last',
-  'until',
-  'to',
-  'in',
+  "sec",
+  "min",
+  "hour",
+  "day",
+  "week",
+  "month",
+  "year",
+  "decade",
+  "jan",
+  "feb",
+  "mar",
+  "apr",
+  "may",
+  "jun",
+  "jul",
+  "aug",
+  "sep",
+  "oct",
+  "nov",
+  "dec",
+  "pm",
+  "am",
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "sat",
+  "sun",
+  "tomorrow",
+  "yesterday",
+  "today",
+  "now",
+  "ago",
+  "next",
+  "last",
+  "until",
+  "to",
+  "in",
 ];
 
-const MUST_INCLUDE_PATTERN = new RegExp(`[0-9]|(${MUST_INCLUDE_WORDS.join('|')})`, 'iu');
+const MUST_INCLUDE_PATTERN = new RegExp(`[0-9]|(${MUST_INCLUDE_WORDS.join("|")})`, "iu");
 const TRAILING_IANA_TIMEZONE = /(?:^|\s)([A-Za-z]+\/[A-Za-z0-9_+\-]+(?:\/[A-Za-z0-9_+\-]+)*)$/u;
 
 interface IanaTimezoneContext {
@@ -78,21 +78,21 @@ interface IanaTimezoneContext {
 
 const getIanaTimezoneOffsetMinutes = (timeZone: string, at: Date): number | null => {
   try {
-    const formatter = new Intl.DateTimeFormat('en-US', {
+    const formatter = new Intl.DateTimeFormat("en-US", {
       timeZone,
       hour12: false,
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
     });
 
     const parts = formatter.formatToParts(at);
     const partMap: Record<string, string> = {};
     for (const part of parts) {
-      if (part.type === 'literal') continue;
+      if (part.type === "literal") continue;
       partMap[part.type] = part.value;
     }
 
@@ -122,15 +122,15 @@ const buildDateWithIanaTimezone = (
   components: ParsedComponents,
   context: IanaTimezoneContext,
 ): Date | null => {
-  const year = components.get('year');
-  const month = components.get('month');
-  const day = components.get('day');
+  const year = components.get("year");
+  const month = components.get("month");
+  const day = components.get("day");
   if (year == null || month == null || day == null) return null;
 
-  const hour = components.get('hour') ?? 0;
-  const minute = components.get('minute') ?? 0;
-  const second = components.get('second') ?? 0;
-  const millisecond = components.get('millisecond') ?? 0;
+  const hour = components.get("hour") ?? 0;
+  const minute = components.get("minute") ?? 0;
+  const second = components.get("second") ?? 0;
+  const millisecond = components.get("millisecond") ?? 0;
 
   let offset = context.offsetAtReference;
   const buildDate = (offsetMinutes: number): Date =>
@@ -199,8 +199,8 @@ export const parseTime = (input: string, ref = new Date()): TimeParseResult | un
     const [value, unit] = aliasMatch.slice(1);
     const name = ALIASES.get(unit.toLowerCase()) ?? unit;
     const matchEndIndex = aliasMatch.index + aliasMatch[0].length;
-    const endsWithSpace = clean[matchEndIndex] === ' ';
-    const suffix = endsWithSpace ? '' : ' ';
+    const endsWithSpace = clean[matchEndIndex] === " ";
+    const suffix = endsWithSpace ? "" : " ";
     clean = `${clean.slice(0, Math.max(0, aliasMatch.index))}${value} ${name}${suffix}${clean.slice(
       Math.max(0, matchEndIndex),
     )}`;
@@ -262,7 +262,7 @@ export const parseRelativeTime = (input: string): number | null => {
   const ref = new Date();
   const date = parseTime(input, ref);
   if (date && /\d+(?:\.\d+)?\s*decades?\b/iu.test(input) && /\bago\b/iu.test(input)) {
-    const forwardDate = parseTime(input.replace(/\s+ago\b/iu, ''), ref);
+    const forwardDate = parseTime(input.replace(/\s+ago\b/iu, ""), ref);
     return forwardDate ? -forwardDate.relative : date.relative;
   }
   return date ? date.relative : null;
@@ -280,7 +280,7 @@ const stripStringPrefixes = (content: string): string => {
     clean.push(part);
   }
 
-  return clean.join(' ').trim();
+  return clean.join(" ").trim();
 };
 
 /**

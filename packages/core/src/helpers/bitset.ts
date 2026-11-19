@@ -25,9 +25,9 @@ export function testPermission(value: BitwiseInput, permission: BitwiseInput): b
 }
 
 function serialize<Type extends BitwiseInput>(value: bigint, as: Type): Type {
-  if (typeof as === 'string') return value.toString() as Type;
-  if (typeof as === 'number') {
-    if (as > Number.MAX_SAFE_INTEGER) throw new Error('Too big to serialize as a number');
+  if (typeof as === "string") return value.toString() as Type;
+  if (typeof as === "number") {
+    if (as > Number.MAX_SAFE_INTEGER) throw new Error("Too big to serialize as a number");
     return Number(value) as Type;
   }
 

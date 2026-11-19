@@ -1,5 +1,5 @@
-import { type Emoji } from '../classes/emoji.js';
-import { SHEET_EMOJI_SIZE, SHEET_EMOJIS_PER_ROW } from '../constants.js';
+import { type Emoji } from "../classes/emoji.js";
+import { SHEET_EMOJI_SIZE, SHEET_EMOJIS_PER_ROW } from "../constants.js";
 
 export interface SheetPosition {
   top: number;
@@ -9,7 +9,7 @@ export interface SheetPosition {
 }
 
 export const getSheetPosition = (emoji: Emoji) => {
-  if (emoji.index === null) throw new Error('Emoji is not present in the sheet.');
+  if (emoji.index === null) throw new Error("Emoji is not present in the sheet.");
   const sheetRow = Math.floor(emoji.index / SHEET_EMOJIS_PER_ROW);
   const sheetColumn = emoji.index % SHEET_EMOJIS_PER_ROW;
   return {

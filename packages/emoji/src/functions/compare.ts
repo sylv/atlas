@@ -1,16 +1,16 @@
-import { isPlainObject } from '@atlasbot/core';
-import { Emoji } from '../classes/emoji.js';
-import { type APIEmojiLike } from '../types.js';
-import { type ResolvableInputs } from './resolve.js';
-import { resolveEmoji } from './resolve.js';
+import { isPlainObject } from "@atlasbot/core";
+import { Emoji } from "../classes/emoji.js";
+import { type APIEmojiLike } from "../types.js";
+import { type ResolvableInputs } from "./resolve.js";
+import { resolveEmoji } from "./resolve.js";
 
 function getComparableString(input: unknown): string | undefined {
   if (input instanceof Emoji) return input.id;
-  if (typeof input === 'string') return input;
+  if (typeof input === "string") return input;
   if (isPlainObject(input)) {
-    if (typeof input.id === 'string') return input.id;
-    if (typeof input.name === 'string') return input.name;
-    if (typeof input.name === 'string') return input.name;
+    if (typeof input.id === "string") return input.id;
+    if (typeof input.name === "string") return input.name;
+    if (typeof input.name === "string") return input.name;
   }
 }
 

@@ -1,8 +1,8 @@
-import { NUMBER_REGEX } from '@atlasbot/core';
-import { SKIN_TONES, TWITTER_EMOJI_ROOT } from '../constants.js';
-import { hasSkinToneSupport } from '../functions/has-skin-tone-support.js';
-import { toCodePoints, toCodePointsWithoutVS16s } from '../functions/helpers.js';
-import { type EmojiCategory } from './emoji-category.js';
+import { NUMBER_REGEX } from "@atlasbot/core";
+import { SKIN_TONES, TWITTER_EMOJI_ROOT } from "../constants.js";
+import { hasSkinToneSupport } from "../functions/has-skin-tone-support.js";
+import { toCodePoints, toCodePointsWithoutVS16s } from "../functions/helpers.js";
+import { type EmojiCategory } from "./emoji-category.js";
 
 export class Emoji {
   /**
@@ -66,7 +66,7 @@ export class Emoji {
    * @warning throws if this emoji is a custom emoji
    */
   get codePoints(): string[] {
-    if (this.custom) throw new Error('Cannot get codepoints of custom emoji.');
+    if (this.custom) throw new Error("Cannot get codepoints of custom emoji.");
     return toCodePoints(this.id);
   }
 
@@ -81,7 +81,7 @@ export class Emoji {
    * The URL for the image for this emoji.
    */
   get url(): string {
-    return this.getUrl('png', 'gif', 'png');
+    return this.getUrl("png", "gif", "png");
   }
 
   /**
@@ -89,7 +89,7 @@ export class Emoji {
    */
   get markdown(): string {
     if (!this.custom) return this.id;
-    const animatedPrefix = this.animated ? 'a' : '';
+    const animatedPrefix = this.animated ? "a" : "";
     return `<${animatedPrefix}${this.reaction}>`;
   }
 
@@ -118,18 +118,18 @@ export class Emoji {
   }
 
   getUrl(
-    nativeFormat: 'png' | 'svg' = 'png',
-    animatedFormat: 'gif' = 'gif',
-    guildFormat: 'png' | 'webp' = 'png',
+    nativeFormat: "png" | "svg" = "png",
+    animatedFormat: "gif" = "gif",
+    guildFormat: "png" | "webp" = "png",
   ): string {
     if (this.custom) {
       const extension = this.animated ? animatedFormat : guildFormat;
       return `https://cdn.discordapp.com/emojis/${this.id}.${extension}`;
     }
 
-    const assetType = nativeFormat === 'svg' ? 'svg' : '72x72';
+    const assetType = nativeFormat === "svg" ? "svg" : "72x72";
     const codePoints = toCodePointsWithoutVS16s(this.id);
-    const key = codePoints.join('-');
+    const key = codePoints.join("-");
     return `${TWITTER_EMOJI_ROOT}/${assetType}/${key}.${nativeFormat}`;
   }
 

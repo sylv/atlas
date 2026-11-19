@@ -9,7 +9,7 @@ export const NUMBER_REGEX = /^-?\d+$/u;
  * A zero-width space character that is invisible but still counts as a character.
  */
 // fun fact, copilot autocompleted this. lol
-export const ZERO_WIDTH_SPACE = '​';
+export const ZERO_WIDTH_SPACE = "​";
 
 export const DEFAULT_TICKET_RESPONSE = `
 {responder.embed 

@@ -1,8 +1,8 @@
-import { decimalToHex } from '@atlasbot/core';
-import { type RgbaObject } from 'hex-rgb';
-import hexRgb from 'hex-rgb';
-import { type Colour } from './known-colours.js';
-import { KNOWN_COLOURS } from './known-colours.js';
+import { decimalToHex } from "@atlasbot/core";
+import { type RgbaObject } from "hex-rgb";
+import hexRgb from "hex-rgb";
+import { type Colour } from "./known-colours.js";
+import { KNOWN_COLOURS } from "./known-colours.js";
 
 /**
  * Get the distance between two colours (in rgb)

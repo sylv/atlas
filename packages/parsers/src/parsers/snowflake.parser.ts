@@ -3,7 +3,7 @@ import {
   DISCORD_PREFIXED_SNOWFLAKE_REGEX,
   DISCORD_YOUNGEST_ID_TIMESTAMP,
   DISCORD_SNOWFLAKE_REGEX_STRICT,
-} from '@atlasbot/discord-utilities';
+} from "@atlasbot/discord-utilities";
 
 export enum SnowflakeTypes {
   USER,
@@ -24,17 +24,17 @@ export interface ParsedSnowflake {
 export function parseSnowflakeType(prefix?: string): SnowflakeTypes | undefined {
   if (!prefix) return;
   switch (prefix) {
-    case '!':
-    case '@': {
+    case "!":
+    case "@": {
       return SnowflakeTypes.USER;
     }
-    case '#': {
+    case "#": {
       return SnowflakeTypes.CHANNEL;
     }
-    case '&': {
+    case "&": {
       return SnowflakeTypes.ROLE;
     }
-    case ':': {
+    case ":": {
       return SnowflakeTypes.EMOJI;
     }
   }
@@ -70,6 +70,6 @@ export function parseSnowflake(input: string | bigint): ParsedSnowflake | undefi
  * Unlike "parseSnowflake", this will only return true if the entire input is a snowflake.
  */
 export function isSnowflake(input: unknown): input is `${bigint}` {
-  if (typeof input !== 'bigint' && typeof input !== 'string') return false;
+  if (typeof input !== "bigint" && typeof input !== "string") return false;
   return DISCORD_SNOWFLAKE_REGEX_STRICT.test(input.toString());
 }

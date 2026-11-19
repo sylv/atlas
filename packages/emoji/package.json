@@ -1,8 +1,17 @@
 {
   "name": "@atlasbot/emoji",
   "version": "10.5.17",
-  "type": "module",
   "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sylv/atlas.git"
+  },
+  "files": [
+    "dist",
+    "data",
+    "scripts"
+  ],
+  "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
@@ -10,15 +19,6 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "files": [
-    "dist",
-    "data",
-    "scripts"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sylv/atlas.git"
   },
   "scripts": {
     "build": "tsc --noEmit && tsup && tsc -p tsconfig.build.json",

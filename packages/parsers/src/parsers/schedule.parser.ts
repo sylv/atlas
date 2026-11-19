@@ -1,11 +1,11 @@
-import { CronExpressionParser } from 'cron-parser';
-import { ms, parseAbsoluteDate } from './time.parser.js';
+import { CronExpressionParser } from "cron-parser";
+import { ms, parseAbsoluteDate } from "./time.parser.js";
 
 function parseTextSchedule(input: string, ref: Date): Date | undefined {
   const result = parseAbsoluteDate(input, ref);
   if (!result) return;
   if (result.getTime() < ref.getTime()) {
-    if (!input.toLowerCase().includes('tomorrow')) {
+    if (!input.toLowerCase().includes("tomorrow")) {
       // fixes "every day at 4pm" which would have parsed to
       // today at 4pm even if its in the past.
       // god is dead and we have killed him.
@@ -20,7 +20,7 @@ function parseTextSchedule(input: string, ref: Date): Date | undefined {
 
 function parseCronSchedule(input: string, ref: Date): Date | undefined {
   try {
-    const result = CronExpressionParser.parse(input, { tz: 'UTC', currentDate: ref });
+    const result = CronExpressionParser.parse(input, { tz: "UTC", currentDate: ref });
     return result.next().toDate();
   } catch {}
 }

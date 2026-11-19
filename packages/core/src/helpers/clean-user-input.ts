@@ -1,4 +1,4 @@
-const CLEAN_KEYS = new Set(['term', 'query', 'input', 'searchTerm']);
+const CLEAN_KEYS = new Set(["term", "query", "input", "searchTerm"]);
 const BACKTICK_REGEX = /\\?`/gu;
 
 /**

@@ -1,4 +1,4 @@
-import { type Emoji } from '../classes/emoji.js';
+import { type Emoji } from "../classes/emoji.js";
 
 export const HAS_SKIN_TONE_SUPPORT = new Set<string>();
 

@@ -22,5 +22,5 @@ export function affix(input: string | number | boolean, affixes: Affix[] | Affix
     if (affix.suffix) result.push(affix.suffix);
   }
 
-  return result.join(' ');
+  return result.join(" ");
 }

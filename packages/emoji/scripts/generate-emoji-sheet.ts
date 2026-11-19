@@ -1,16 +1,16 @@
-import { execSync } from 'child_process';
-import { existsSync, mkdirSync, statSync } from 'fs';
-import { join, resolve } from 'path';
-import sharp, { type OverlayOptions } from 'sharp';
-import { type Emoji } from '../src/classes/emoji.js';
-import { SHEET_EMOJIS_PER_ROW, SHEET_EMOJI_SIZE } from '../src/constants.js';
-import { emojis } from '../src/emojis.js';
-import { getSheetPosition } from '../src/functions/get-sheet-position.js';
-import { toCodePointsWithoutVS16s } from '../src/functions/helpers.js';
-import { tmpdir } from 'os';
+import { execSync } from "child_process";
+import { existsSync, mkdirSync, statSync } from "fs";
+import { join, resolve } from "path";
+import sharp, { type OverlayOptions } from "sharp";
+import { type Emoji } from "../src/classes/emoji.js";
+import { SHEET_EMOJIS_PER_ROW, SHEET_EMOJI_SIZE } from "../src/constants.js";
+import { emojis } from "../src/emojis.js";
+import { getSheetPosition } from "../src/functions/get-sheet-position.js";
+import { toCodePointsWithoutVS16s } from "../src/functions/helpers.js";
+import { tmpdir } from "os";
 
-const TWEMOJI_REPO = 'https://github.com/jdecked/twemoji.git';
-const cloneDir = join(tmpdir(), 'twemoji');
+const TWEMOJI_REPO = "https://github.com/jdecked/twemoji.git";
+const cloneDir = join(tmpdir(), "twemoji");
 
 const RAW_EMOJI_OPTIONS = {
   width: SHEET_EMOJI_SIZE,
@@ -25,22 +25,22 @@ const RAW_ROW_OPTIONS = {
 };
 
 function getEmojiPath(emoji: Emoji) {
-  return join(cloneDir, 'assets', 'svg', `${toCodePointsWithoutVS16s(emoji.id).join('-')}.svg`);
+  return join(cloneDir, "assets", "svg", `${toCodePointsWithoutVS16s(emoji.id).join("-")}.svg`);
 }
 
 function cloneTwemoji() {
-  if (existsSync(join(cloneDir, 'assets', 'svg'))) {
-    console.log('twemoji already cloned, skipping');
+  if (existsSync(join(cloneDir, "assets", "svg"))) {
+    console.log("twemoji already cloned, skipping");
     return;
   }
 
-  console.log('Cloning jdecked/twemoji (shallow)...');
+  console.log("Cloning jdecked/twemoji (shallow)...");
   mkdirSync(cloneDir, { recursive: true });
   execSync(`git clone --depth 1 --filter=blob:none --sparse ${TWEMOJI_REPO} ${cloneDir}`, {
-    stdio: 'inherit',
+    stdio: "inherit",
   });
-  execSync('git sparse-checkout set assets/svg', { cwd: cloneDir, stdio: 'inherit' });
-  console.log('Cloned twemoji');
+  execSync("git sparse-checkout set assets/svg", { cwd: cloneDir, stdio: "inherit" });
+  console.log("Cloned twemoji");
 }
 
 async function main() {
@@ -48,7 +48,7 @@ async function main() {
 
   // todo: calculate emoji positions using getSheetPosition() and setSheetPosition()
   // so we can be sure they're always gonna be accurate
-  console.log('Generating rows');
+  console.log("Generating rows");
   const rowOverlays: OverlayOptions[][] = [];
   for (const emoji of emojis) {
     if (emoji.index === null) continue;
@@ -59,11 +59,7 @@ async function main() {
     const emojiOverlay: OverlayOptions = {
       top: 0,
       left: position.left,
-      input: await sharp(emojiPath)
-        .resize(SHEET_EMOJI_SIZE, SHEET_EMOJI_SIZE)
-        .ensureAlpha()
-        .raw()
-        .toBuffer(),
+      input: await sharp(emojiPath).resize(SHEET_EMOJI_SIZE, SHEET_EMOJI_SIZE).ensureAlpha().raw().toBuffer(),
       raw: RAW_EMOJI_OPTIONS,
     };
 
@@ -71,7 +67,7 @@ async function main() {
     else rowOverlays[position.sheetRow] = [emojiOverlay];
   }
 
-  console.log('Rendering rows');
+  console.log("Rendering rows");
   const rows = await Promise.all(
     rowOverlays.map(async (composite) =>
       sharp({
@@ -88,7 +84,7 @@ async function main() {
     ),
   );
 
-  console.log('Generating sheet');
+  console.log("Generating sheet");
   // const sheetPath = resolve(`data/sheet-${SHEET_EMOJI_SIZE}x${SHEET_EMOJI_SIZE}.png`);
   const sheetPath = resolve(`data/sheet-${SHEET_EMOJI_SIZE}x${SHEET_EMOJI_SIZE}.png`);
   await sharp({
@@ -115,7 +111,7 @@ async function main() {
     .toFile(sheetPath);
 
   // with the best settings above, this saves 25-75kb. with the worst it can save up to 2.5mb
-  execSync(`npx oxipng -o max --strip all --alpha ${sheetPath}`, { stdio: 'inherit' });
+  execSync(`npx oxipng -o max --strip all --alpha ${sheetPath}`, { stdio: "inherit" });
 
   const size = statSync(sheetPath).size;
   const kb = (size / 1024).toFixed(2);

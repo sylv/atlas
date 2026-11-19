@@ -25,8 +25,8 @@ export interface SnippetOptions {
 export function createSnippet(source: string, options?: SnippetOptions): string {
   source = source.trim();
   const maxLength = options?.maxLength ?? DEFAULT_MAX_LEN;
-  const suffix = options?.suffix ?? '…';
-  const extra = options?.extra ? ` ${options.extra}` : '';
+  const suffix = options?.suffix ?? "…";
+  const extra = options?.extra ? ` ${options.extra}` : "";
   if (source.length + extra.length <= maxLength) {
     return source + extra;
   }

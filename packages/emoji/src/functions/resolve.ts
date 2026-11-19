@@ -1,7 +1,7 @@
-import { Emoji } from '../classes/emoji.js';
-import { emojis } from '../emojis.js';
-import { type APIEmojiLike } from '../types.js';
-import { removeVS16s } from './helpers.js';
+import { Emoji } from "../classes/emoji.js";
+import { emojis } from "../emojis.js";
+import { type APIEmojiLike } from "../types.js";
+import { removeVS16s } from "./helpers.js";
 
 export type ResolvableInputs = string | null | undefined | Emoji | APIEmojiLike;
 
@@ -43,7 +43,10 @@ export function resolveEmojiUnicode(input: string): Emoji | undefined {
 /**
  * Parse a guild emoji string to a resolved emoji.
  */
-export function resolveEmojiGuild(input: string, guildEmojis: APIEmojiLike[] | null | undefined): Emoji | undefined {
+export function resolveEmojiGuild(
+  input: string,
+  guildEmojis: APIEmojiLike[] | null | undefined,
+): Emoji | undefined {
   const guildMatch = DISCORD_GUILD_EMOJI_REGEX.exec(input);
   if (guildMatch) {
     const { id, name, animated } = guildMatch.groups!;
@@ -59,7 +62,9 @@ export function resolveEmojiGuild(input: string, guildEmojis: APIEmojiLike[] | n
     }
 
     const query = (reactionMatch?.groups?.name ?? input).trim().toLowerCase();
-    const customEmoji = guildEmojis.find((emoji) => emoji.name?.toLowerCase() === query || emoji.id === query);
+    const customEmoji = guildEmojis.find(
+      (emoji) => emoji.name?.toLowerCase() === query || emoji.id === query,
+    );
     if (customEmoji) {
       return convertDiscordToResolved(customEmoji);
     }
@@ -76,7 +81,7 @@ export function resolveEmoji(
 ): Emoji | undefined {
   if (!input) return;
   if (input instanceof Emoji) return input;
-  if (typeof input === 'object') return convertDiscordToResolved(input);
+  if (typeof input === "object") return convertDiscordToResolved(input);
   return resolveEmojiGuild(input, guildEmojis) ?? resolveEmojiUnicode(input);
 }
 
@@ -84,10 +89,13 @@ export function resolveEmoji(
  * Resolve a native or guild emoji to a Emoji, throwing
  * if one could not be resolved.
  */
-export function resolveEmojiOrThrow(input: ResolvableInputs, guildEmojis: APIEmojiLike[] | null | undefined): Emoji {
+export function resolveEmojiOrThrow(
+  input: ResolvableInputs,
+  guildEmojis: APIEmojiLike[] | null | undefined,
+): Emoji {
   const output = resolveEmoji(input, guildEmojis);
   if (!output) {
-    const error: any = new Error('Could not resolve emoji');
+    const error: any = new Error("Could not resolve emoji");
     error.input = input;
     throw error;
   }
