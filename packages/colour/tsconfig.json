@@ -1,5 +1,5 @@
 {
-  "extends": "@atlasbot/configs/tsconfig",
+  "extends": "../../tsconfig.base.json",
   "include": ["src"],
   "compilerOptions": {
     "outDir": "dist",

@@ -15,7 +15,7 @@ export function createTsupConfig({
   minify = false,
   splitting = true,
   keepNames = true,
-  dts = true,
+  dts = false,
   sourcemap = true,
   esbuildPlugins = [],
 } = {}) {

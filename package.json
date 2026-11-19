@@ -3,25 +3,22 @@
   "version": "0.0.0",
   "private": true,
   "license": "AGPL-3.0",
-  "packageManager": "bun@1.4.4",
+  "packageManager": "pnpm@12.15.0",
   "engines": {
-    "node": ">=20",
-    "bun": ">=1.4.4"
+    "node": ">=22",
+    "pnpm": ">=12.15.0"
   },
   "scripts": {
-    "clean": "rm -rf ./packages/*/{tsconfig.tsbuildinfo,lib,dist,yarn-error.log,.next}",
-    "build": "turbo run build",
-    "lint": "turbo run lint",
-    "test": "turbo run test"
+    "clean": "rm -rf ./packages/*/dist",
+    "build": "pnpm run --recursive build",
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "test": "pnpm run --recursive test"
   },
   "devDependencies": {
-    "@atlasbot/configs": "^10.6.3",
-    "@biomejs/biome": "^2.6.7",
+    "oxfmt": "^0.79.0",
+    "oxlint": "^1.94.0",
     "tsup": "^9.0.0",
-    "turbo": "^2.11.11"
-  },
-  "workspaces": [
-    "packages/**",
-    "apps/**"
-  ]
+    "typescript": "7.0.2"
+  }
 }

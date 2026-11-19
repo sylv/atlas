@@ -16,9 +16,9 @@
     "url": "https://github.com/sylv/atlas.git"
   },
   "scripts": {
-    "build": "tsc --noEmit && tsup",
+    "build": "tsc --noEmit && tsup && tsc -p tsconfig.build.json",
     "test": "vitest run",
-    "prepublishOnly": "bun run test && bun run build"
+    "prepublishOnly": "pnpm test && pnpm build"
   },
   "dependencies": {
     "@atlasbot/core": "workspace:*",
@@ -26,9 +26,8 @@
     "rgb-hex": "^4.1.0"
   },
   "devDependencies": {
-    "@atlasbot/configs": "workspace:*",
     "tsup": "^9.0.0",
-    "typescript": "^6.0.3",
+    "typescript": "7.0.2",
     "vitest": "^5.1.0"
   }
 }

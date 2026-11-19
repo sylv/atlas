@@ -36,7 +36,6 @@ libraries or services with links are open source. the rest are *currently* close
 ### libraries
 
 - [colour](./packages/colour) - colour utilities and presets
-- [configs](./packages/configs) - eslint and tsconfig files
 - [core](./packages/core) - reusable generic utilities used in many places, including the web
 - [discord-utilities](./packages/discord-utilities) - utilities for Discord, closely tied to elpis but can run in browsers
 - [emoji](./packages/emoji) - emoji sheets and utilities for dealing with ~~an abomination~~ emojis

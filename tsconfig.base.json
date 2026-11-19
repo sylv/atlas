@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "lib": ["es2023"],
+    "target": "es2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "declaration": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmitOnError": true,
+    "stripInternal": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
+  }
+}

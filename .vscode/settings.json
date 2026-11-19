@@ -1,4 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "npm.packageManager": "bun"
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "npm.packageManager": "pnpm",
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
