@@ -23,16 +23,16 @@
   "dependencies": {
     "@atlasbot/core": "workspace:*",
     "@atlasbot/discord-utilities": "workspace:*",
-    "chrono-node": "^2.10.1",
-    "cron-parser": "^5.7.0"
+    "chrono-node": "^2.10.3",
+    "cron-parser": "^5.10.4"
   },
   "devDependencies": {
     "@atlasbot/configs": "workspace:*",
     "@types/ms": "^2.1.0",
-    "@types/node": "^26.1.2",
+    "@types/node": "^26.6.6",
     "ms": "2.1.3",
-    "tsup": "^8.5.1",
+    "tsup": "^9.0.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.10"
+    "vitest": "^5.1.0"
   }
 }

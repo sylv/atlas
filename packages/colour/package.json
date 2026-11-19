@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "@atlasbot/configs": "workspace:*",
-    "tsup": "^8.5.1",
+    "tsup": "^9.0.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.10"
+    "vitest": "^5.1.0"
   }
 }
