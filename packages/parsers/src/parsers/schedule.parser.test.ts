@@ -61,7 +61,7 @@ for (const test of tests) {
 
 it("should not punish cron schedules that might be under 1m in the future but really run every 1m", async () => {
   const result = parseSchedule("*/1 * * * *", testRef);
-  expect(result!.getMinutes()).toEqual(testRef.getMinutes() + 1);
+  expect(result!.getMinutes()).toEqual((testRef.getMinutes() + 1) % 60);
   expect(result!.getSeconds()).toEqual(0);
 });
 
