@@ -1,0 +1,60 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "timezone": "UTC",
+  "schedule": ["* 0-5 * * 1"],
+  "commitMessageAction": "bump",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "commitMessageLowerCase": "auto",
+  "minimumReleaseAge": "1 day",
+  "internalChecksFilter": "strict",
+  "platformAutomerge": false,
+  "postUpdateOptions": ["pnpmDedupe"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "commitMessageAction": "refresh",
+    "commitMessageTopic": "lockfiles",
+    "commitMessageExtra": ""
+  },
+  "packageRules": [
+    {
+      "description": "peer ranges are what we support, not what we test against",
+      "matchDepTypes": ["peerDependencies"],
+      "enabled": false
+    },
+    {
+      "description": "published packages, so only move a dependency range when the new version is outside it",
+      "matchDepTypes": ["dependencies"],
+      "rangeStrategy": "update-lockfile"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "patches, and minors past 0.x, merge themselves once every check passes",
+      "matchUpdateTypes": ["patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["minor"],
+      "matchCurrentVersion": "!/^v?0\\./",
+      "automerge": true
+    },
+    {
+      "description": "one pr for the updates that merge themselves",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "deps",
+      "groupSlug": "non-major"
+    },
+    {
+      "description": "0.x minors break semver, so they get their own pr and wait for approval",
+      "matchUpdateTypes": ["minor"],
+      "matchCurrentVersion": "/^v?0\\./",
+      "groupName": null,
+      "automerge": false
+    }
+  ]
+}
